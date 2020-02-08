@@ -1,0 +1,60 @@
+<template>
+  <div class="sidebar">
+    <div class="profile text-center">
+      <v-avatar size="80">
+        <img src="../assets/images/profile.png" alt="profile"
+        >
+      </v-avatar>
+      <div>
+        <h4>John Champion</h4>
+        <p>i am John and i know you</p>
+      </div>
+    </div>
+
+    <div class="menu">
+      <v-divider></v-divider>
+      <v-list nav dense>
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item v-for="(item, i) in items" :key="i">
+            <v-list-item-icon>
+              <v-icon v-text="item.icon"></v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title v-text="item.text"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </div>
+  </div>
+</template>
+
+
+<script>
+export default {
+  data () {
+    return {
+      item: 0,
+      items: [
+        { text: "Dashboard", icon: 'mdi-view-dashboard' },
+        { text: "Manage Resume", icon: "mdi-card-bulleted-outline" },
+        { text: 'Applications', icon: 'mdi-file-account' },
+        { text: 'Certification', icon: 'mdi-medal' },
+        { text: 'Saved Job', icon: 'mdi-bookmark' },
+        { text: 'Account Settings', icon: 'mdi-cogs' },
+        { text: 'Logout', icon: 'mdi-logout' },
+      ],
+    }
+  }
+}
+</script>
+
+<style>
+  .sidebar {
+    background-color: #FFFFFF;
+    border: 1px solid rgb(238, 237, 237);
+    border-radius: 5px;
+    padding-top: 15px;
+  }
+</style>
