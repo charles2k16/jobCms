@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card shaped :color="bgColor" flat>
+    <v-card shaped :color="bgColor" flat elevation="9">
       <v-card-title class="white--text">{{title}}</v-card-title>
       <v-card-actions class="mt-n6">
         <v-card-subtitle id="dash" class="mt-n6 ml-3"></v-card-subtitle>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "JobsCard",
+  name: "JobCountCard",
   props: [
     "title", "totalNumber", "bgColor"
   ],
