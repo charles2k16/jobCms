@@ -4,10 +4,10 @@
     <v-content id="content">
       <v-container fill-height>
         <v-row>
-          <v-col md="4">
+          <v-col md="3">
             <SideBar />
           </v-col>
-          <v-col md="8">
+          <v-col md="9">
             <div>
               <router-view></router-view>
             </div>

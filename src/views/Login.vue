@@ -25,15 +25,16 @@
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-btn :loading="loading" 
-              :disabled="loading"
-              block
-              color="primary"
-              class="white--text"
-              @click="login">
-              <v-icon left dark>mdi-login</v-icon>
-              Login
-            </v-btn>
+              <v-btn 
+                :loading="loading" 
+                :disabled="loading"
+                block
+                color="primary"
+                class="white--text"
+                @click="login">
+                <v-icon left dark>mdi-login</v-icon>
+                Login
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>

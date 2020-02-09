@@ -14,8 +14,8 @@
     <div class="menu">
       <v-divider></v-divider>
       <v-list nav dense>
-        <v-list-item-group v-model="item" color="primary">
-          <v-list-item v-for="(item, i) in items" :key="i">
+        <v-list-item-group v-model="menu" color="primary">
+          <v-list-item v-for="(item, i) in menuItems" :key="i">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -35,15 +35,15 @@
 export default {
   data () {
     return {
-      item: 0,
-      items: [
-        { text: "Dashboard", icon: 'mdi-view-dashboard' },
+      menu: 0,
+      menuItems: [
+        { text: "Dashboard", icon: "mdi-view-dashboard" },
         { text: "Manage Resume", icon: "mdi-card-bulleted-outline" },
-        { text: 'Applications', icon: 'mdi-file-account' },
-        { text: 'Certification', icon: 'mdi-medal' },
-        { text: 'Saved Job', icon: 'mdi-bookmark' },
-        { text: 'Account Settings', icon: 'mdi-cogs' },
-        { text: 'Logout', icon: 'mdi-logout' },
+        { text: "Applications", icon: "mdi-file-account" },
+        { text: "Certification", icon: "mdi-medal" },
+        { text: "Saved Job", icon: 'mdi-bookmark' },
+        { text: "Account Settings", icon: "mdi-cogs" },
+        { text: "Logout", icon: "mdi-logout" },
       ],
     }
   }
