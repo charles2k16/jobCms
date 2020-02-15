@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-card outlined class="mt-5">
+    <v-overlay :value="overlay">
+      <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
+    </v-overlay>
+    <v-card outlined class="mt-5" v-for="job in jobs" :key="job.id">
       <v-card-actions>
         <v-card-title>Latest Jobs</v-card-title>
         <v-spacer></v-spacer>
@@ -13,17 +16,17 @@
         <v-row>
           <v-col md="3">
             <div>
-              <h5 style="display: inline-block;">Posted on 15th March 2019</h5><span id="roundDot" class="ml-4"></span>
+              <h5 style="display: inline-block;">{{job.created_at | moment("dddd, MMMM Do") }}</h5><span id="roundDot" class="ml-4"></span>
               <h4>1 year 2months</h4>
             </div>
           </v-col>
           <v-col md="9">
             <div>
-              <h5>Bloom Impact Company</h5>
-              <h3>UX DESIGNER</h3>
+              <h5>{{job.company}}</h5>
+              <h3>{{job.title}}</h3>
               <div class="d-flex justify-between">
                 <span class="mr-4"><v-icon small color="yellow darken-1">mdi-map-marker</v-icon></span>
-                <span>San Francisco Bay</span>
+                <span>{{job.location}}</span>
               </div>
               <div class="d-flex justify-between">
                 <span class="mr-4"><v-icon small color="green">mdi-cash-usd-outline</v-icon></span>
@@ -39,8 +42,7 @@
               </div>
               <div class="d-flex justify-between">
                 <span class="mr-4"><v-icon small color="indigo darken-1">mdi-comment-outline</v-icon></span>
-                <span>I managed to secure the server of the company and did more remote AWS installations.
-                I also developed the teams backened with Golang.</span>
+                <span v-html="job.description"></span>
               </div>
             </div>
           </v-col>
@@ -51,8 +53,33 @@
 </template>
 
 <script>
+import Vue from "vue"
+import jobService from "../api/jobs";
+Vue.use(require('vue-moment'));
+
 export default {
-  name: "JobsCard"
+  name: "JobsCard",
+  data () {
+    return {
+      jobs: [],
+      overlay: false,
+    }
+  },
+  created () {
+    this.getRecentJobs()
+  },
+  methods: {
+    getRecentJobs () {
+      this.overlay = true
+      jobService.getJobs()
+        .then((response) => {
+          this.jobs = response
+          this.overlay = false
+        }).catch((errors) => {
+          console.log(errors)
+        })
+    }
+  }
 }
 </script>
 

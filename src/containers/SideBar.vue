@@ -5,9 +5,9 @@
         <img src="../assets/images/profile.png" alt="profile"
         >
       </v-avatar>
-      <div>
-        <h4>John Champion</h4>
-        <p>i am John and i know you</p>
+      <div class="mt-4">
+        <h4 class="font-weight-black">John Champion</h4>
+        <p class="font-weight-light">i am John and i know you</p>
       </div>
     </div>
 

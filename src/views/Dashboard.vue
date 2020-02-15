@@ -14,9 +14,6 @@
     <div>
       <JobsCard />
     </div>
-    <div>
-      
-    </div>
   </div>
 </template>
 
