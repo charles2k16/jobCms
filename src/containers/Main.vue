@@ -13,7 +13,7 @@
       <v-app-bar-nav-icon
         @click.stop="miniVariant = !miniVariant"
       ></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Paic</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
