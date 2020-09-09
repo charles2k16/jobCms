@@ -1,0 +1,78 @@
+Profiles
+
+GET      /api/profile/
+Gets the list of available profiles.
+
+GET      /api/profile/{ profile-name }
+Gets the definition of a specific profile.
+
+POST     /api/profile/{ profile-name, ... }
+Create a new profile.
+
+HEAD     /api/profile/{ profile-name }/apply
+??
+
+
+HEAD     /api/profile/{ profile-name }/reset
+
+Reset the parameters of a profile.
+
+GET      /api/profile/parameter/{ profile-name, parameter-name }
+Get the value of a specific parameter from a specific profile.
+
+POST     /api/profile/parameter/{ profile-name, parameter-name, parameter-value }
+
+         Parameters =
+{ 
+status =  { active, suspended },
+call-forward = { unconditional, on-busy, on-unanswer, on-inactive },
+star-dial = { unknown, call-forward }
+		prompt = { on-busy, on-unanswer, on-inactive }
+}
+
+
+
+Subscribers
+
+GET      /api/subscriber/{ msisdn }
+Gets the details of a subscriber.
+
+POST     /api/subscriber/{ msisdn, profile-name, ... }
+Creates a subscriber with an initial profile.
+
+GET      /api/subscriber/parameters/{ msisdn }
+Gets all the parameters of a subscriber.
+
+GET      /api/subscriber/parameters/{ msisdn, parameter-name }
+Gets a specific parameter of a subscriber.
+
+Example of usage:
+Verify if subscriber is valid
+>>  /api/subscriber/parameters/34652132713/status
+<< { “msisdn”:"34652132713", "status":"active"  }
+
+Verify if there if subscriber is registered 
+>>  /api/subscriber/parameters/34652132713/active-register
+<< { “msisdn”:"34652132713", "active-register":"true"  }
+
+Get prompt 
+>>  /api/subscriber/parameters/34652132713/prompt
+<< {“msisdn”: "34652132713", "on-busy":"busy.wav", "on-unanswered":"unanswered.wav",  "on-inactive ":"inactive.wav  }
+
+
+POST     /api/subscriber/parameters/{ msisdn, parameter-name, parameter-value }
+Modifies the parameter of the subscriber.
+
+         Parameters =
+{ 
+status =  { active, suspended },
+call-forward = { unconditional, on-busy, on-unanswer, on-inactive },
+star-dial = { unknown, call-forward }
+		prompt = { on-busy, on-unanswer, on-inactive }
+active-register = { true, false }
+sip-user = { username }
+sip-password = { password }
+}
+
+HEAD     /api/subscriber/profile/{ msisdn }/apply
+Apply profile configuration for a subscriber.
