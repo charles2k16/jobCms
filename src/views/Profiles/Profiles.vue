@@ -1,6 +1,6 @@
 <template>
   <div id="dashboard">
-    <h1>This is the profiles</h1>
+    <h1></h1>
   </div>
 </template>
 
@@ -15,4 +15,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
