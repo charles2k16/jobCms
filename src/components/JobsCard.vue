@@ -16,7 +16,8 @@
         <v-row>
           <v-col md="3">
             <div>
-              <h5 style="display: inline-block;">{{job.created_at | moment("dddd, MMMM Do") }}</h5><span id="roundDot" class="ml-4"></span>
+              <h5 style="display: inline-block;">{{job.created_at | moment("dddd, MMMM Do") }}</h5>
+              <span id="roundDot" class="ml-4"></span>
               <h4>1 year 2months</h4>
             </div>
           </v-col>
@@ -70,7 +71,6 @@ export default {
   },
   methods: {
     getRecentJobs () {
-      this.overlay = true
       jobService.getJobs()
         .then((response) => {
           this.jobs = response
