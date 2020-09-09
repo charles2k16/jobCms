@@ -29,6 +29,8 @@
           prepend-inner-icon="mdi-search"
         ></v-text-field>
 
+        <v-spacer></v-spacer>
+
         <v-chip class="ma-2" outlined pill>
           User Account
           <v-icon right>mdi-account-outline</v-icon>
