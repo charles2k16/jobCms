@@ -6,37 +6,31 @@
       clipped
       :mini-variant="miniVariant"
     >
-      <v-list dense nav class="py-0">
-        <v-list-item two-line :class="miniVariant && 'px-0'">
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/men/81.jpg" />
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title>Application</v-list-item-title>
-            <v-list-item-subtitle>Subtext</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+      <SideBar />
     </v-navigation-drawer>
 
-    <v-app-bar app color="indigo" dark clipped-left>
-      <v-toolbar-title>Application</v-toolbar-title>
+    <v-app-bar app color="brown darken-2" dark clipped-left>
       <v-app-bar-nav-icon
         @click.stop="miniVariant = !miniVariant"
       ></v-app-bar-nav-icon>
+      <v-toolbar-title>Application</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-text-field
+        solo-inverted
+        flat
+        loading
+        clearable
+        hide-details
+        label="Search"
+        prepend-inner-icon="mdi-search"
+      ></v-text-field>
+
+      <v-chip class="ma-2" outlined pill>
+        User Account
+        <v-icon right>mdi-account-outline</v-icon>
+      </v-chip>
     </v-app-bar>
 
     <v-main>
@@ -55,25 +49,25 @@
         </v-row>
       </v-container>
     </v-main>
-    <v-footer color="indigo" app>
+    <v-footer color="brown darken-2" app>
       <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+import SideBar from './SideBar';
+
 export default {
   props: {
     source: String,
   },
+  components: {
+    SideBar,
+  },
   data: () => ({
     drawer: null,
     miniVariant: false,
-    items: [
-      { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-      { title: 'Photos', icon: 'mdi-image' },
-      { title: 'About', icon: 'mdi-help-box' },
-    ],
   }),
 };
 </script>
