@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../containers/Main";
 import Login from "../views/Login";
-import Profiles from "../views/Profiles";
+import Profiles from "../views/Profiles/Profiles";
 
 Vue.use(VueRouter);
 
