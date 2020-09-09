@@ -38,9 +38,9 @@
       </v-app-bar>
 
       <v-main>
-        <div style="margin-top: 70px; width: 1000px; margin-left: 250px;">
+        <v-container fluid class="grey lighten-4 fill-height">
           <router-view />
-        </div>
+        </v-container>
       </v-main>
       <v-footer color="brown darken-2" app>
         <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
@@ -65,5 +65,3 @@ export default {
   }),
 };
 </script>
-
-<style></style>
