@@ -6,8 +6,8 @@
         >
       </v-avatar>
       <div class="mt-4">
-        <h4 class="font-weight-black">John Champion</h4>
-        <p class="font-weight-light">i am John and i know you</p>
+        <h4 class="font-weight-black"></h4>
+        <p class="font-weight-light"></p>
       </div>
     </div>
 
@@ -37,12 +37,10 @@ export default {
     return {
       menu: 0,
       menuItems: [
-        { text: "Dashboard", icon: "mdi-view-dashboard" },
-        { text: "Manage Resume", icon: "mdi-card-bulleted-outline" },
-        { text: "Applications", icon: "mdi-file-account" },
-        { text: "Certification", icon: "mdi-medal" },
-        { text: "Saved Job", icon: 'mdi-bookmark' },
-        { text: "Account Settings", icon: "mdi-cogs" },
+        { text: "Profiles", icon: "mdi-view-dashboard" },
+        { text: "Subscribers", icon: "mdi-card-bulleted-outline" },
+        { text: "Users", icon: "mdi-file-account" },
+
         { text: "Logout", icon: "mdi-logout" },
       ],
     }
