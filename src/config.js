@@ -1,11 +1,11 @@
 function getApiUrl () {
   let hn = window.location.hostname
   if (hn === 'localhost') {
-    return 'https://www.thomqdesigns.com/api/'
+    return 'http://localhost:9090/api/profile/'
   } else if (hn === 'jobscms.netlify.com') {
-    return 'https://www.thomqdesigns.com/api/'
+    return 'http://localhost:9090/api/profile'
   }
-  return 'https://www.thomqdesigns.com/api/'
+  return 'http://localhost:9090/api/profile'
 }
 
 const API_URL = getApiUrl();
@@ -16,5 +16,5 @@ export default {
   CURRENT_USER: API_URL + "currentuser",
   LOGOUT: API_URL + "logout",
   EMPLOYEE: API_URL + "employee",
-  JOBS: "https://jobs.github.com/positions.json?description=python&location=new+york"
+  JOBS: "http://localhost:9090/api/profile"
 }

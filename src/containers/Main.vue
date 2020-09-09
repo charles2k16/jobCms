@@ -11,7 +11,7 @@
         <SideBar />
       </v-navigation-drawer>
 
-      <v-app-bar app color="brown darken-2" dark clipped-left>
+      <v-app-bar app color="brown darken-" dark clipped-left>
         <v-app-bar-nav-icon
           @click.stop="miniVariant = !miniVariant"
         ></v-app-bar-nav-icon>
