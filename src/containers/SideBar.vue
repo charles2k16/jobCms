@@ -3,16 +3,16 @@
     <v-list dense nav class="py-0">
       <v-list-item two-line :class="miniVariant && 'px-0'">
         <v-list-item-avatar>
-          <!-- <img src="https://randomuser.me/api/portraits/men/81.jpg" /> -->
+          <img src="https://randomuser.me/api/portraits/men/81.jpg" />
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title></v-list-item-title>
-          <v-list-item-subtitle></v-list-item-subtitle>
+          <v-list-item-title>Charles Kwabena</v-list-item-title>
+          <v-list-item-subtitle>Soft. Engineer</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
-      <v-divider></v-divider>
+      <v-divider class="mb-5"></v-divider>
 
       <v-list-item-group v-model="menu" color="brown darken-2">
         <v-list-item v-for="item in items" :key="item.title" link>
