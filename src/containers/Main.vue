@@ -26,7 +26,7 @@
           clearable
           hide-details
           label="Search"
-          prepend-inner-icon="mdi-search"
+          prepend-inner-icon="mdi-magnify"
         ></v-text-field>
 
         <v-spacer></v-spacer>

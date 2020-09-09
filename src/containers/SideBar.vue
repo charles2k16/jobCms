@@ -7,8 +7,8 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Application</v-list-item-title>
-          <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+          <v-list-item-title>Charles Kwabena</v-list-item-title>
+          <v-list-item-subtitle>Soft. Engineer</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
