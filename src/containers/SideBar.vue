@@ -35,11 +35,11 @@ export default {
     return {
       menu: 0,
       items: [
-        { title: 'Profiles', icon: 'mdi-view-dashboard' },
+        { title: 'Profiles', icon: 'mdi-account-circle' },
         { title: 'Subscribers', icon: 'mdi-card-bulleted-outline' },
         { title: 'Users', icon: 'mdi-file-account' },
 
-        { title: 'Logout', icon: 'mdi-logout' },
+        { title: 'Logout', icon: 'mdi-logout', },
       ],
     };
   },
@@ -50,5 +50,7 @@ export default {
 .sidebar {
   border-radius: 5px;
   padding-top: 15px;
+  
+  
 }
 </style>
