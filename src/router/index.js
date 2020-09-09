@@ -2,21 +2,21 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../containers/Main";
 import Login from "../views/Login";
-import Dashboard from "../views/Dashboard";
+import Profiles from "../views/Profiles";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/dashboard",
+    redirect: "/profiles",
     name: "Home",
     component: Main,
     children: [
       {
-        path: "/dashboard",
-        name: "dashboard",
-        component: Dashboard
+        path: "/profiles",
+        name: "profiles",
+        component: Profiles
       }
     ]
   },
