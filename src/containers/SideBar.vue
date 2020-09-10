@@ -30,6 +30,18 @@
         </v-list-item>
       </v-list-group>
     </v-list>
+
+    <div class="logoutButton" style="width:100%">
+      <v-list-item>
+        <v-list-item-icon>
+          <v-icon color="white">mdi-account</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title class="white--text">Logout</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </div>
   </div>
 </template>
 
@@ -72,5 +84,11 @@ export default {
 .sidebar {
   border-radius: 5px;
   padding-top: 15px;
+}
+.logoutButton {
+  background: #8b222f;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2px;
 }
 </style>
