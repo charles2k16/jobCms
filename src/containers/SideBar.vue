@@ -14,17 +14,26 @@
 
       <v-divider class="mb-5"></v-divider>
 
-      <v-list-item-group v-model="menu" color="brown darken-2">
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
+      <v-list-group
+        v-for="item in menuItems"
+        :key="item.title"
+        v-model="item.active"
+        :prepend-icon="item.icon"
+        color="#8B222F"
+        no-action
+      >
+        <template v-slot:activator>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title v-text="item.title"></v-list-item-title>
+          </v-list-item-content>
+        </template>
+
+        <v-list-item v-for="subItem in item.items" :key="subItem.title" link>
+          <v-list-item-content>
+            <v-list-item-title v-text="subItem.title"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </v-list-item-group>
+      </v-list-group>
     </v-list>
   </div>
 </template>
@@ -39,7 +48,25 @@ export default {
         { title: 'Subscribers', icon: 'mdi-card-bulleted-outline' },
         { title: 'Users', icon: 'mdi-file-account' },
 
-        { title: 'Logout', icon: 'mdi-logout', },
+        { title: 'Logout', icon: 'mdi-logout' },
+      ],
+      menuItems: [
+        {
+          icon: 'mdi-account-circle',
+          title: 'Profile',
+          active: true,
+          items: [{ title: 'Profile List' }, { title: 'Reapply' }],
+        },
+        {
+          icon: 'mdi-account-circle',
+          title: 'Subscribers',
+          items: [{ title: 'List Item' }],
+        },
+        {
+          icon: 'mdi-card-bulleted-outline',
+          title: 'Users',
+          items: [{ title: 'List' }],
+        },
       ],
     };
   },
@@ -50,7 +77,5 @@ export default {
 .sidebar {
   border-radius: 5px;
   padding-top: 15px;
-  
-  
 }
 </style>

@@ -11,23 +11,11 @@
         <SideBar />
       </v-navigation-drawer>
 
-      <v-app-bar app color="brown darken-" dark clipped-left>
+      <v-app-bar app color="#8B222F" dark clipped-left>
         <v-app-bar-nav-icon
           @click.stop="miniVariant = !miniVariant"
         ></v-app-bar-nav-icon>
         <v-toolbar-title>Paic</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
-        <v-text-field
-          solo-inverted
-          flat
-          loading
-          clearable
-          hide-details
-          label="Search"
-          prepend-inner-icon="mdi-magnify"
-        ></v-text-field>
 
         <v-spacer></v-spacer>
 
@@ -38,11 +26,11 @@
       </v-app-bar>
 
       <v-main>
-        <v-container fluid class="grey lighten-4 fill-height">
+        <v-container fluid class="fill-height">
           <router-view />
         </v-container>
       </v-main>
-      <v-footer color="brown darken-2" app>
+      <v-footer color="#8B222F" app>
         <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
     </v-container>
