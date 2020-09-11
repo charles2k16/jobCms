@@ -21,7 +21,7 @@
       >
 
         <v-divider class="mb-5"></v-divider>
-        
+
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -92,7 +92,7 @@ export default {
 .sidebar {
   border-radius: 5px;
   padding-top: 15px;
-  background-color: grey;
+
 }
 .logoutButton {
   background: #8b222f;
