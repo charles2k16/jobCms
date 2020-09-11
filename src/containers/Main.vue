@@ -22,8 +22,8 @@
         <v-spacer></v-spacer>
 
         <v-chip class="ma-2" outlined pill>
-          User Account
-          <v-icon right>mdi-account-outline</v-icon>
+          <v-img src="../assets/images/person.svg"></v-img>
+          <!-- <v-icon right>mdi-account-outline</v-icon> -->
         </v-chip>
       </v-app-bar>
 
