@@ -20,7 +20,7 @@
         no-action
       >
 
-        <v-divider class="mb-5"></v-divider>
+       
 
         <template v-slot:activator>
           <v-list-item-content>
