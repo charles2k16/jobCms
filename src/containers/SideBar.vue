@@ -28,7 +28,7 @@
           </v-list-item-content>
         </template>
 
-        <v-divider class="mb-5"></v-divider>
+      
 
         <v-list-item v-for="subItem in item.items" :key="subItem.title" link>
           <v-list-item-content>
