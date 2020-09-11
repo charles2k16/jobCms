@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%">
     <v-toolbar dense flat>
-      <v-toolbar-title>Profile / List</v-toolbar-title>
+      <v-toolbar-title>Subscribers / Create</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
