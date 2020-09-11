@@ -16,7 +16,11 @@
           @click.stop="miniVariant = !miniVariant"
         ></v-app-bar-nav-icon>
         <v-toolbar-title>
-            <v-img src="../assets/images/paic.png"></v-img>
+
+        <router-link to="/">
+         <v-img src="../assets/images/paic.png"></v-img>
+        </router-link>
+            
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
