@@ -13,7 +13,7 @@
         color="#8B222F"
         label="Search"
         prepend-inner-icon="mdi-magnify"
-      ></v-text-field>
+      id="search_bar"></v-text-field>
     </v-toolbar>
 
     <v-card class="mt-10">
@@ -30,3 +30,14 @@ export default {
   },
 };
 </script>
+
+<style>
+#search_bar {
+  top: 10px;
+  left: 852px;
+  width: 319px;
+  height: 35px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  opacity: 1;
+}
+</style>
