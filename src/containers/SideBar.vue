@@ -21,7 +21,6 @@
       >
 
        
-
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -99,6 +98,15 @@ export default {
   position: absolute;
   bottom: 0;
   margin-bottom: 2px;
+  /* top: 705px;
+  left: -1px;
+  width: 308px;
+  height: 63px;
+  background: var(--unnamed-color-8b222f) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--unnamed-color-ffffff);
+  background: #8B222F 0% 0% no-repeat padding-box;
+  border: 1px solid #FFFFFF;
+  opacity: 1; */
 }
 
 </style>

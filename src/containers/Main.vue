@@ -15,7 +15,9 @@
         <v-app-bar-nav-icon
           @click.stop="miniVariant = !miniVariant"
         ></v-app-bar-nav-icon>
-        <v-toolbar-title>Paic</v-toolbar-title>
+        <v-toolbar-title>
+            <v-img src="../assets/images/paic.png"></v-img>
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
