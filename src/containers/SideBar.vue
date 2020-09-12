@@ -1,16 +1,6 @@
 <template>
- 
   <div class="sidebar">
-
     <v-list dense nav class="py-0">
-      <v-list-item two-line :class="miniVariant && 'px-0'">
-        <v-list-item-content>
-         
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider class="mb-5"></v-divider>
-
       <v-list-group
         v-for="item in menuItems"
         :key="item.title"
@@ -19,17 +9,20 @@
         color="#8B222F"
         no-action
       >
-
-       
         <template v-slot:activator>
           <v-list-item-content>
             <v-list-item-title v-text="item.title"></v-list-item-title>
           </v-list-item-content>
         </template>
 
-      
-
-        <v-list-item v-for="subItem in item.items" :key="subItem.title" link>
+        <v-list-item
+          v-for="subItem in item.items"
+          :key="subItem.title"
+          link
+          router
+          :to="subItem.route"
+          active-class="active"
+        >
           <v-list-item-content>
             <v-list-item-title v-text="subItem.title"></v-list-item-title>
           </v-list-item-content>
@@ -49,7 +42,6 @@
       </v-list-item>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -57,24 +49,25 @@ export default {
   data() {
     return {
       menu: 0,
-      items: [
-        { title: 'Profiles', icon: 'mdi-account-circle' },
-        { title: 'Subscribers', icon: 'mdi-card-bulleted-outline' },
-        { title: 'Users', icon: 'mdi-file-account' },
-
-        { title: 'Logout', icon: 'mdi-logout' },
-      ],
       menuItems: [
         {
           icon: 'mdi-account-circle',
           title: 'Profile',
           active: true,
-          items: [{ title: ' List' }, { title: 'Create' }, { title: 'Reapply' }],
+          items: [
+            { title: ' List', route: '/profiles' },
+            { title: 'Create', route: '/create-profiles' },
+            { title: 'Reapply' },
+          ],
         },
         {
           icon: 'mdi-account-circle',
           title: 'Subscribers',
-          items: [{ title: 'List' }, { title: 'Create' }, { title: 'Apply online' }],
+          items: [
+            { title: 'List' },
+            { title: 'Create' },
+            { title: 'Apply online' },
+          ],
         },
         {
           icon: 'mdi-card-bulleted-outline',
@@ -91,7 +84,6 @@ export default {
 .sidebar {
   border-radius: 5px;
   padding-top: 15px;
-
 }
 .logoutButton {
   background: #8b222f;
@@ -108,5 +100,14 @@ export default {
   border: 1px solid #FFFFFF;
   opacity: 1; */
 }
-
+.v-list-group__items {
+  background: white;
+}
+.active {
+  background: #ca5c69;
+  border-radius: none;
+}
+.active .v-list-item__content .v-list-item__title {
+  color: whitesmoke;
+}
 </style>
