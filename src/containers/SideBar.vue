@@ -57,22 +57,22 @@ export default {
           items: [
             { title: ' List', route: '/profiles' },
             { title: 'Create', route: '/create-profiles' },
-            { title: 'Reapply' },
+            { title: 'Reapply', route: '/reapply'},
           ],
         },
         {
           icon: 'mdi-account-circle',
           title: 'Subscribers',
           items: [
-            { title: 'List' },
-            { title: 'Create' },
-            { title: 'Apply online' },
+            { title: 'List', route: '/subscribers-list' },
+            { title: 'Create', route: '/create-subscriber' },
+            { title: 'Apply Profile', route: '/apply-profile' },
           ],
         },
         {
           icon: 'mdi-card-bulleted-outline',
           title: 'Users',
-          items: [{ title: 'List' }, { title: 'Create' }],
+          items: [{ title: 'List', route: '/users-list' }, { title: 'Create', route: '/create-user' }],
         },
       ],
     };
