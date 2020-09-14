@@ -1,109 +1,99 @@
 <template>
-  <div style="width:100%">
-    <el-card>
-      <el-table :data="profileList" style="width: 100%">
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="Profile"> </el-table-column>
-        <el-table-column label="Features" align="center">
-          <template slot-scope="props">
-            <div>
-              <!-- <el-button type="success" size="mini" plain
-                >CFU<i class="el-icon-circle-check el-icon-right"></i
-              ></el-button> -->
-
-              <span
-                style="margin-right:20px"
-                v-for="ff in props.row.features"
-                :key="ff.feature"
-                >{{ ff.feature }}
-                <span
-                  ><i
-                    class="el-icon-circle-check"
-                    :style="
-                      ff.status == 'active' ? 'color: green;' : 'color: red;'
-                    "
-                  ></i></span
-              ></span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column prop="subscribers" label="Subscribers" align="center">
-        </el-table-column>
-      </el-table>
-    </el-card>
+  <div>
+    <el-form ref="form" :model="form" label-width="120px">
+  <el-form-item label="Profile name">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+ 
+  <el-form-item label="Activity type">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox label="Online activities" name="type"></el-checkbox>
+      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
+      <el-checkbox label="Offline activities" name="type"></el-checkbox>
+      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="Resources">
+    <el-radio-group v-model="form.resource">
+      <el-radio label="Sponsor"></el-radio>
+      <el-radio label="Venue"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="Activity form">
+    <el-input type="textarea" v-model="form.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
+  </el-form-item>
+</el-form>
   </div>
 </template>
 
+<el-form ref="form" :model="form" label-width="120px">
+  <el-form-item label="Activity name">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+  <el-form-item label="Activity zone">
+    <el-select v-model="form.region" placeholder="please select your zone">
+      <el-option label="Zone one" value="shanghai"></el-option>
+      <el-option label="Zone two" value="beijing"></el-option>
+    </el-select>
+  </el-form-item>
+  <el-form-item label="Activity time">
+    <el-col :span="11">
+      <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="Instant delivery">
+    <el-switch v-model="form.delivery"></el-switch>
+  </el-form-item>
+  <el-form-item label="Activity type">
+    <el-checkbox-group v-model="form.type">
+      <el-checkbox label="Online activities" name="type"></el-checkbox>
+      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
+      <el-checkbox label="Offline activities" name="type"></el-checkbox>
+      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+  <el-form-item label="Resources">
+    <el-radio-group v-model="form.resource">
+      <el-radio label="Sponsor"></el-radio>
+      <el-radio label="Venue"></el-radio>
+    </el-radio-group>
+  </el-form-item>
+  <el-form-item label="Activity form">
+    <el-input type="textarea" v-model="form.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="onSubmit">Create</el-button>
+    <el-button>Cancel</el-button>
+  </el-form-item>
+</el-form>
 <script>
-export default {
-  name: 'profileList',
-  data() {
-    return {
-      profileList: [],
-      profiles: [
-        {
-          name: 'Profile1',
-          status: 'active',
-          callForward: 'unconditional',
-          startDial: 'unknown',
-          prompt: 'on-active',
-          subscribers: 2,
-        },
-        {
-          name: 'Profile2',
-          status: 'active',
-          callForward: 'on-unanswer',
-          startDial: 'unknown',
-          prompt: 'on-active',
-          subscribers: 2,
-        },
-        {
-          name: 'Profile3',
-          status: 'active',
-          callForward: 'on-busy',
-          startDial: 'unknown',
-          prompt: 'on-active',
-          subscribers: 100,
-        },
-      ],
-    };
-  },
-  created() {
-    this.getProfileList();
-  },
-  methods: {
-    getProfileList() {
-      let self = this;
-      this.profiles.map(function(profile) {
-        profile.callForward =
-          profile.callForward == 'unconditional'
-            ? 'CFU'
-            : profile.callForward == 'on-busy'
-            ? 'CFB'
-            : profile.callForward == 'on-unanswer'
-            ? 'CFNRC'
-            : profile.callForward == 'on-inactive'
-            ? 'CFNRY'
-            : 'none';
-
-        profile.features = self.getFeatures(profile.callForward);
-      });
-
-      this.profileList = this.profiles;
-      console.log(this.profileList);
+  export default {
+    data() {
+      return {
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      }
     },
-  },
-};
+    methods: {
+      onSubmit() {
+        console.log('submit!');
+      }
+    }
+  }
 </script>
-
-<style>
-#search_bar {
-  top: 10px;
-  left: 852px;
-  width: 319px;
-  height: 35px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-</style>
-
