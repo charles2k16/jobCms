@@ -42,7 +42,7 @@ export default {
       profileList: [],
       profiles: [
         {
-          name: 'Profile1',
+          name: '',
           status: 'active',
           callForward: 'unconditional',
           startDial: 'unknown',
@@ -50,7 +50,7 @@ export default {
           subscribers: 2,
         },
         {
-          name: 'Profile2',
+          name: '',
           status: 'active',
           callForward: 'on-unanswer',
           startDial: 'unknown',
@@ -58,7 +58,7 @@ export default {
           subscribers: 2,
         },
         {
-          name: 'Profile3',
+          name: '',
           status: 'active',
           callForward: 'on-busy',
           startDial: 'unknown',
