@@ -5,12 +5,12 @@
     <el-input v-model="form.name"></el-input>
   </el-form-item>
  
-  <el-form-item label="Activity type">
+  <el-form-item label="Features">
     <el-checkbox-group v-model="form.type">
-      <el-checkbox label="Online activities" name="type"></el-checkbox>
-      <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-      <el-checkbox label="Offline activities" name="type"></el-checkbox>
-      <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
+      <el-checkbox label="CALL FORWARD UNCONDITIONAL (CFU)" name="type"></el-checkbox><br />
+      <el-checkbox label="CALL FORWARD UNREACHABLE (CFNRC)" name="type"></el-checkbox><br />
+      <el-checkbox label="CALL FORWARD ON BUSY (CFB)" name="type"></el-checkbox><br />
+      <el-checkbox label="CALL FORWARD ON NO REPLY (CFNRY)" name="type"></el-checkbox>
     </el-checkbox-group>
   </el-form-item>
   <el-form-item label="Resources">
