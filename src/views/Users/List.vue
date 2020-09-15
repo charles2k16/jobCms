@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%">
     <v-toolbar dense flat>
-      <v-toolbar-title>Profile / List</v-toolbar-title>
+      <v-toolbar-title>Users / List</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -14,13 +14,14 @@
         label="Search"
         prepend-inner-icon="mdi-magnify"
       id="search_bar"></v-text-field>
-    </v-toolbar>
+    </v-toolbar> <br />
+    <hr>
 
     <el-card>
       <el-table :data="profileList" style="width: 100%">
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="Profile"> </el-table-column>
-        <el-table-column label="Features" align="center">
+        <el-table-column prop="name" label="User"> </el-table-column>
+        <el-table-column label="Name" align="center">
           <template slot-scope="props">
             <div>
               <!-- <el-button type="success" size="mini" plain
@@ -43,7 +44,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="subscribers" label="Subscribers" align="center">
+        <el-table-column prop="subscribers" label="Login" align="center">
         </el-table-column>
       </el-table>
     </el-card>
