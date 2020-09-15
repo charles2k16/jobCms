@@ -1,5 +1,21 @@
 <template>
   <div style="width:100%">
+    <v-toolbar dense flat>
+      <v-toolbar-title>Profile / List</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-text-field
+        flat
+        outlined
+        clearable
+        hide-details
+        color="#8B222F"
+        label="Search"
+        prepend-inner-icon="mdi-magnify"
+      id="search_bar"></v-text-field>
+    </v-toolbar>
+
     <el-card>
       <el-table :data="profileList" style="width: 100%">
         <el-table-column type="selection" width="55"> </el-table-column>
@@ -94,15 +110,19 @@ export default {
     },
   },
 };
+
 </script>
 
 <style>
 #search_bar {
   top: 10px;
   left: 852px;
-  width: 319px;
+  width: 31px;
   height: 35px;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
   opacity: 1;
 }
 </style>
+
+
+
