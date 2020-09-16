@@ -23,8 +23,23 @@ export default {
       features.map(function (ff) {
         ff.status = (callForward == ff.feature) ? 'active' : ff.status
       })
-      console.log(features)
       return features
-    }
+    },
+    successMessage(message) {
+      this.$message({
+        showClose: true,
+        message: message,
+        type: 'primary',
+        duration: 2000
+      });
+    },
+    errorMessage(message) {
+      this.$message({
+        showClose: true,
+        message: message,
+        type: 'error',
+        duration: 3000
+      });
+    },
   }
 }

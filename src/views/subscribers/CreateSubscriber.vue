@@ -1,17 +1,27 @@
 <template>
   <div>
     <el-form
-      ref="profileform"
-      :model="profileform"
+      ref="subcriberform"
+      :model="subcriberform"
       label-width="120px"
       style="width: 50%"
     >
+      <el-form-item label="MSISDN">
+        <el-input
+          v-model="subcriberform.msisdn"
+          :disabled="disabled"
+        ></el-input>
+      </el-form-item>
+
       <el-form-item label="Profile name">
-        <el-input v-model="profileform.name" :disabled="disabled"></el-input>
+        <el-input
+          v-model="subcriberform.profileName"
+          :disabled="disabled"
+        ></el-input>
       </el-form-item>
 
       <el-form-item label="Features">
-        <el-checkbox-group v-model="profileform.type">
+        <el-checkbox-group v-model="subcriberform.type">
           <el-checkbox
             label="CALL FORWARD UNCONDITIONAL (CFU)"
             name="type"
@@ -34,15 +44,27 @@
         </el-checkbox-group>
       </el-form-item>
 
+      <el-form-item label="Settings">
+        <el-checkbox-group v-model="subcriberform.type">
+          <el-checkbox label="ACTIVE (ACT)" name="type"></el-checkbox><br />
+          <el-checkbox label="SUSPENDED (SUS)" name="type"></el-checkbox><br />
+          <el-checkbox
+            label="DETACHED SUBSCRIBERS (DTS)"
+            name="type"
+          ></el-checkbox
+          ><br />
+        </el-checkbox-group>
+      </el-form-item>
+
       <el-form-item label="Notes">
         <el-input
           type="textarea"
+          v-model="subcriberform.desc"
           :autosize="{ minRows: 2, maxRows: 4 }"
-          v-model="profileform.desc"
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="small" @click="onSubmit"
+        <el-button size="small" type="primary" @click="onSubmit"
           >Save</el-button
         >
         <el-button size="small">Cancel</el-button>
@@ -56,9 +78,10 @@ export default {
   data() {
     return {
       disabled: false,
-      newProfile: null,
-      profileform: {
-        name: '',
+      newSubscriber: null,
+      subcriberform: {
+        msisdn: '',
+        profileName: '',
         region: '',
         date1: '',
         date2: '',
@@ -70,17 +93,20 @@ export default {
     };
   },
   created() {
-    this.getprofile(this.$route.query.profile[0]);
+    this.getSubscriber(this.$route.query.subscriber[0]);
   },
   methods: {
-    getprofile(profile) {
-      if (profile !== undefined) {
-        this.newProfile = profile;
-        this.profileform.name = profile.name;
+    getSubscriber(sub) {
+      if (sub !== undefined) {
+        this.newSubscriber = sub;
+        this.subcriberform.profileName = sub.profileName;
+        this.subcriberform.msisdn = sub.msisdn;
         this.disabled = true;
       }
     },
-    onSubmit() {},
+    onSubmit() {
+      console.log('submit!');
+    },
   },
 };
 </script>

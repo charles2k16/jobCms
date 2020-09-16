@@ -2,13 +2,14 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../containers/Main";
 import Login from "../views/Login";
-import ProfileList from "../views/Profiles/ProfileList";
-import CreateProfile from "../views/Profiles/CreateProfile";
-import Reapply from "../views/Profiles/Reapply";
-import Subscribers from "../views/Subscribers/Subscribers";
-import Create from "../views/Subscribers/Create";
-import ApplyProfile from "../views/Subscribers/ApplyProfile";
-
+import ProfileList from "../views/profiles/ProfileList";
+import CreateProfile from "../views/profiles/CreateProfile";
+import Reapply from "../views/profiles/Reapply";
+import Subscriberlist from "../views/subscribers/Subscriberlist"
+import CreateSubscriber from "../views/subscribers/CreateSubscriber"
+import SubscriberApply from "../views/subscribers/SubscriberApply"
+import UserList from "../views/users/UserList"
+import UserCreate from "../views/users/UserCreate"
 
 
 Vue.use(VueRouter);
@@ -22,59 +23,44 @@ const routes = [
     children: [
       {
         path: "/profiles",
-        name: "profiles",
+        name: "Profile-List",
         component: ProfileList
       },
       {
         path: "/create-profiles",
-        name: "Create Profiles",
+        name: "Profile-Create",
         component: CreateProfile
       },
       {
         path: "/reapply",
-        name: "Reapply",
+        name: "Profile-Reapply",
         component: Reapply
-      }
-    ]
-  },
-  {
-    path: "/",
-    name: "Home",
-    component: Main,
-    children: [
-      {
-        path: "/subscribers-list",
-        name: "Subscribers List",
-        component: Subscribers
       },
       {
-        path: "/create-subscriber",
-        name: "Create Subscriber",
-        component: Create
+        path: "/subcribers",
+        name: "Subscribers-List",
+        component: Subscriberlist
       },
       {
-        path: "/apply-profile",
-        name: "Reapply Profile",
-        component: ApplyProfile
-      }
-    ]
-  },
-  {
-    path: "/",
-    name: "Home",
-    component: Main,
-    children: [
-      {
-        path: "/users-list",
-        name: "Users List",
-        component: Subscribers
+        path: "/create-subscribers",
+        name: "Subscribers-Create",
+        component: CreateSubscriber
       },
       {
-        path: "/create-user",
-        name: "Create User",
-        component: Create
+        path: "/subcriber-apply",
+        name: "Subscribers-Apply",
+        component: SubscriberApply
+      },
+      {
+        path: "/users",
+        name: "Users-List",
+        component: UserList
+      },
+      {
+        path: "/ceate-user",
+        name: "Users-Create",
+        component: UserCreate
       }
-      
     ]
   },
   {

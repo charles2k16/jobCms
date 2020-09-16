@@ -1,32 +1,17 @@
 <template>
   <div style="width:100%">
-    <v-toolbar dense flat>
-      <v-toolbar-title>Profile / List</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-text-field
-        flat
-        outlined
-        clearable
-        hide-details
-        color="#8B222F"
-        label="Search"
-        prepend-inner-icon="mdi-magnify"
-      id="search_bar"></v-text-field>
-    </v-toolbar>
-
     <el-card>
-      <el-table :data="profileList" style="width: 100%">
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="Profile"> </el-table-column>
+      <el-table
+        :data="profileList"
+        ref="profileTable"
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55" />
+        <el-table-column prop="name" label="Profile" />
         <el-table-column label="Features" align="center">
           <template slot-scope="props">
             <div>
-              <!-- <el-button type="success" size="mini" plain
-                >CFU<i class="el-icon-circle-check el-icon-right"></i
-              ></el-button> -->
-
               <span
                 style="margin-right:20px"
                 v-for="ff in props.row.features"
@@ -47,6 +32,12 @@
         </el-table-column>
       </el-table>
     </el-card>
+    <div style="text-align: center;" class="mt-4" v-show="actionButtons">
+      <el-button type="info" size="mini" @click="editProfile">Edit</el-button>
+      <el-button type="danger" size="mini" @click="confirmDeleteProfile"
+        >Delete</el-button
+      >
+    </div>
   </div>
 </template>
 
@@ -55,6 +46,8 @@ export default {
   name: 'profileList',
   data() {
     return {
+      actionButtons: false,
+      profileSelected: null,
       profileList: [],
       profiles: [
         {
@@ -106,21 +99,45 @@ export default {
       });
 
       this.profileList = this.profiles;
-      console.log(this.profileList);
+    },
+    handleSelectionChange(selectedProfile) {
+      this.actionButtons = selectedProfile.length > 0 ? true : false;
+      this.profileSelected = selectedProfile;
+    },
+    editProfile() {
+      this.profileSelected.length > 1
+        ? this.errorMessage("Can't edit when two profiles are selected")
+        : this.$router.push({
+            query: { profile: this.profileSelected },
+            path: '/create-profiles',
+          });
+    },
+    confirmDeleteProfile() {
+      let self = this;
+      this.$confirm('This will permanently delete profile data', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning',
+      })
+        .then(() => {
+          self.profileSelected.map(function(p) {
+            self.deleteProfile(p);
+            return p;
+          });
+        })
+        .catch(() => {
+          this.errorMessage('Delete cancelled');
+        });
+    },
+    deleteProfile(profile) {
+      var filtered = this.profiles.filter(function(p) {
+        return p.name !== profile.name;
+      });
+      this.profiles = filtered;
+      this.getProfileList();
+      this.successMessage('Delete successful');
+      this.$refs.profileTable.clearSelection();
     },
   },
 };
-
 </script>
-
-<style>
-#search_bar {
-  top: 10px;
-  left: 852px;
-  width: 31px;
-  height: 35px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  opacity: 1;
-}
-</style>
-
