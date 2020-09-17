@@ -13,7 +13,7 @@
             <span style="color:red;">{{ props.row.msisdn }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="profileName" label="Name" />
+        <el-table-column prop="profileName" label="Profile" />
         <el-table-column label="Features" align="center" width="320">
           <template slot-scope="props">
             <div>

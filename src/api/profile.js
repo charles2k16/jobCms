@@ -1,15 +1,15 @@
 import axios from "axios";
-import config from "../config";
+// import config from "../config";
 
 export default {
   name: "ProfileService",
 
   getProfileList() {
-    let url = config.PROFILE_URL
-    return axios.get(url, {
+    // let url = config.PROFILE_URL
+    return axios.get('http://localhost:9090/api/profile', {
       auth: {
-        username: 'user',
-        password: '$1525$'
+        username: 'foo',
+        password: 'bar'
       }
     })
       .then((response) => Promise.resolve(response.data))

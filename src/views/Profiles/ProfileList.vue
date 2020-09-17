@@ -47,7 +47,7 @@
     >
       <el-form ref="profileform" :model="profileform" label-width="100px">
         <el-form-item label="Profile name">
-          <el-input v-model="profileform.name" :disabled="disabled"></el-input>
+          <el-input v-model="profileform.name"></el-input>
         </el-form-item>
 
         <el-form-item label="Features">
@@ -100,7 +100,6 @@ export default {
   data() {
     return {
       showEditModal: false,
-      disabled: true,
       actionButtons: false,
       profileSelected: null,
       profileList: [],

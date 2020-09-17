@@ -7,7 +7,7 @@
       style="width: 50%"
     >
       <el-form-item label="Profile name">
-        <el-input v-model="profileform.name" :disabled="disabled"></el-input>
+        <el-input v-model="profileform.name"></el-input>
       </el-form-item>
 
       <el-form-item label="Features">

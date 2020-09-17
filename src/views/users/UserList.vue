@@ -100,6 +100,9 @@ export default {
       this.actionButtons = selectedProfile.length > 0 ? true : false;
       this.userSelected = selectedProfile;
     },
+    onSubmit() {
+      console.log('submit!');
+    },
     editProfile() {
       if (this.userSelected.length > 1) {
         this.errorMessage("Can't edit when two users are selected");
