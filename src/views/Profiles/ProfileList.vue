@@ -32,12 +32,65 @@
         </el-table-column>
       </el-table>
     </el-card>
-    <div style="text-align: center;" class="mt-4" v-show="actionButtons">
+    <div style="text-align: right;" class="mt-4 mr-8" v-show="actionButtons">
       <el-button type="info" size="mini" @click="editProfile">Edit</el-button>
       <el-button type="danger" size="mini" @click="confirmDeleteProfile"
         >Delete</el-button
       >
     </div>
+
+    <el-dialog
+      :visible.sync="showEditModal"
+      width="50%"
+      title="Edit Profile"
+      show-close
+    >
+      <el-form ref="profileform" :model="profileform" label-width="120px">
+        <el-form-item label="Profile name">
+          <el-input v-model="profileform.name" :disabled="disabled"></el-input>
+        </el-form-item>
+
+        <el-form-item label="Features">
+          <el-checkbox-group v-model="profileform.type">
+            <el-checkbox
+              label="CALL FORWARD UNCONDITIONAL (CFU)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD UNREACHABLE (CFNRC)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD ON BUSY (CFB)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD ON NO REPLY (CFNRY)"
+              name="type"
+            ></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item label="Notes">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+            v-model="profileform.desc"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button type="primary" size="small" @click="onSubmit"
+          >Save</el-button
+        >
+        <el-button size="small" @click="showEditModal = false"
+          >Cancel</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -46,9 +99,21 @@ export default {
   name: 'profileList',
   data() {
     return {
+      showEditModal: false,
+      disabled: true,
       actionButtons: false,
       profileSelected: null,
       profileList: [],
+      profileform: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: '',
+      },
       profiles: [
         {
           name: 'Profile1',
@@ -97,20 +162,22 @@ export default {
 
         profile.features = self.getFeatures(profile.callForward);
       });
-
       this.profileList = this.profiles;
+    },
+    onSubmit() {
+      console.log('submit!');
     },
     handleSelectionChange(selectedProfile) {
       this.actionButtons = selectedProfile.length > 0 ? true : false;
       this.profileSelected = selectedProfile;
     },
     editProfile() {
-      this.profileSelected.length > 1
-        ? this.errorMessage("Can't edit when two profiles are selected")
-        : this.$router.push({
-            query: { profile: this.profileSelected },
-            path: '/create-profiles',
-          });
+      if (this.profileSelected.length > 1) {
+        this.errorMessage("Can't edit when two profiles are selected");
+      } else {
+        this.profileform.name = this.profileSelected[0].name;
+        this.showEditModal = true;
+      }
     },
     confirmDeleteProfile() {
       let self = this;

@@ -60,6 +60,82 @@
         >Delete</el-button
       >
     </div>
+
+    <el-dialog
+      :visible.sync="showEditModal"
+      width="50%"
+      title="Edit Subscriber"
+      show-close
+    >
+      <el-form ref="subcriberform" :model="subcriberform" label-width="120px">
+        <el-form-item label="MSISDN">
+          <el-input
+            v-model="subcriberform.msisdn"
+            :disabled="disabled"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="Profile name">
+          <el-input
+            v-model="subcriberform.profileName"
+            :disabled="disabled"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="Features">
+          <el-checkbox-group v-model="subcriberform.type">
+            <el-checkbox
+              label="CALL FORWARD UNCONDITIONAL (CFU)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD UNREACHABLE (CFNRC)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD ON BUSY (CFB)"
+              name="type"
+            ></el-checkbox
+            ><br />
+            <el-checkbox
+              label="CALL FORWARD ON NO REPLY (CFNRY)"
+              name="type"
+            ></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item label="Settings">
+          <el-checkbox-group v-model="subcriberform.type">
+            <el-checkbox label="ACTIVE (ACT)" name="type"></el-checkbox><br />
+            <el-checkbox label="SUSPENDED (SUS)" name="type"></el-checkbox
+            ><br />
+            <el-checkbox
+              label="DETACHED SUBSCRIBERS (DTS)"
+              name="type"
+            ></el-checkbox
+            ><br />
+          </el-checkbox-group>
+        </el-form-item>
+
+        <el-form-item label="Notes">
+          <el-input
+            type="textarea"
+            v-model="subcriberform.desc"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer">
+        <el-button type="primary" size="small" @click="onSubmit"
+          >Save</el-button
+        >
+        <el-button size="small" @click="showEditModal = false"
+          >Cancel</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -68,9 +144,22 @@ export default {
   name: 'profileList',
   data() {
     return {
+      disabled: true,
+      showEditModal: false,
       actionButtons: false,
       subSelected: null,
       subcriberList: [],
+      subcriberform: {
+        msisdn: '',
+        profileName: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: '',
+      },
       subscribers: [
         {
           msisdn: '(972) 5555-0123',
@@ -126,13 +215,17 @@ export default {
       this.actionButtons = selectedSub.length > 0 ? true : false;
       this.subSelected = selectedSub;
     },
+    onSubmit() {
+      console.log('submit!');
+    },
     editSubscriber() {
-      this.subSelected.length > 1
-        ? this.errorMessage("Can't edit when two subs are selected")
-        : this.$router.push({
-            query: { subscriber: this.subSelected },
-            path: '/create-subscribers',
-          });
+      if (this.subSelected.length > 1) {
+        this.errorMessage("Can't edit when two subs are selected");
+      } else {
+        this.subcriberform.profileName = this.subSelected[0].profileName;
+        this.subcriberform.msisdn = this.subSelected[0].msisdn;
+        this.showEditModal = true;
+      }
     },
     confirmDeleteSub() {
       let self = this;

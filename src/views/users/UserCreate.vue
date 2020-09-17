@@ -7,7 +7,7 @@
       style="width: 50%"
     >
       <el-form-item label="Name">
-        <el-input v-model="userform.name" placeholder="Enter name"></el-input>
+        <el-input v-model="userform.user" placeholder="Enter name"></el-input>
       </el-form-item>
 
       <el-form-item label="User Type">

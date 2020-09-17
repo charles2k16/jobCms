@@ -55,7 +55,6 @@
 export default {
   data() {
     return {
-      disabled: false,
       newProfile: null,
       profileform: {
         name: '',
@@ -69,17 +68,7 @@ export default {
       },
     };
   },
-  created() {
-    this.getprofile(this.$route.query.profile[0]);
-  },
   methods: {
-    getprofile(profile) {
-      if (profile !== undefined) {
-        this.newProfile = profile;
-        this.profileform.name = profile.name;
-        this.disabled = true;
-      }
-    },
     onSubmit() {},
   },
 };

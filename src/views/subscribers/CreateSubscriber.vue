@@ -77,7 +77,6 @@
 export default {
   data() {
     return {
-      disabled: false,
       newSubscriber: null,
       subcriberform: {
         msisdn: '',
@@ -92,18 +91,7 @@ export default {
       },
     };
   },
-  created() {
-    this.getSubscriber(this.$route.query.subscriber[0]);
-  },
   methods: {
-    getSubscriber(sub) {
-      if (sub !== undefined) {
-        this.newSubscriber = sub;
-        this.subcriberform.profileName = sub.profileName;
-        this.subcriberform.msisdn = sub.msisdn;
-        this.disabled = true;
-      }
-    },
     onSubmit() {
       console.log('submit!');
     },
