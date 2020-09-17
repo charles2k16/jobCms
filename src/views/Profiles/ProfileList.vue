@@ -45,7 +45,7 @@
       title="Edit Profile"
       show-close
     >
-      <el-form ref="profileform" :model="profileform" label-width="120px">
+      <el-form ref="profileform" :model="profileform" label-width="100px">
         <el-form-item label="Profile name">
           <el-input v-model="profileform.name" :disabled="disabled"></el-input>
         </el-form-item>

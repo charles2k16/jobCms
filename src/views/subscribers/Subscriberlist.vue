@@ -67,7 +67,7 @@
       title="Edit Subscriber"
       show-close
     >
-      <el-form ref="subcriberform" :model="subcriberform" label-width="120px">
+      <el-form ref="subcriberform" :model="subcriberform" label-width="100px">
         <el-form-item label="MSISDN">
           <el-input
             v-model="subcriberform.msisdn"
