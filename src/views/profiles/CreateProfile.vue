@@ -4,34 +4,48 @@
       ref="profileform"
       :model="profileform"
       label-width="120px"
-      style="width: 50%"
+      style="width: 60%"
     >
       <el-form-item label="Profile name">
         <el-input v-model="profileform.name"></el-input>
       </el-form-item>
 
       <el-form-item label="Features">
-        <el-checkbox-group v-model="profileform.type">
-          <el-checkbox
-            label="CALL FORWARD UNCONDITIONAL (CFU)"
-            name="type"
-          ></el-checkbox
-          ><br />
-          <el-checkbox
-            label="CALL FORWARD UNREACHABLE (CFNRC)"
-            name="type"
-          ></el-checkbox
-          ><br />
-          <el-checkbox
-            label="CALL FORWARD ON BUSY (CFB)"
-            name="type"
-          ></el-checkbox
-          ><br />
-          <el-checkbox
-            label="CALL FORWARD ON NO REPLY (CFNRY)"
-            name="type"
-          ></el-checkbox>
-        </el-checkbox-group>
+        <br />
+
+        <el-checkbox
+          :indeterminate="isIndeterminate"
+          v-model="checkAll"
+          @change="handleCheckAllChange"
+          >Call Forwarding</el-checkbox
+        >
+        <div style="margin-left: 35px;">
+          <el-checkbox-group
+            v-model="profileform.callForward"
+            @change="handlecheckedOptionsChange"
+          >
+            <el-checkbox v-for="cf in options" :label="cf" :key="cf">{{
+              cf
+            }}</el-checkbox>
+          </el-checkbox-group>
+        </div>
+
+        <el-checkbox
+          :indeterminate="isIndeterminate"
+          v-model="checkAll"
+          @change="handleCheckAllChange"
+          >On Prompt</el-checkbox
+        >
+        <div style="margin-left: 35px;">
+          <el-checkbox-group
+            v-model="profileform.callForward"
+            @change="handlecheckedOptionsChange"
+          >
+            <el-checkbox v-for="cf in options" :label="cf" :key="cf">{{
+              cf
+            }}</el-checkbox>
+          </el-checkbox-group>
+        </div>
       </el-form-item>
 
       <el-form-item label="Notes">
@@ -52,15 +66,23 @@
 </template>
 
 <script>
+const callforwardOptions = [
+  'On Busy',
+  'On Unanswer',
+  'On Inactive',
+  'Unconditional',
+];
 export default {
   data() {
     return {
+      checkAll: false,
+      checkedOptions: ['On Unanswer'],
+      options: callforwardOptions,
+      isIndeterminate: false,
       newProfile: null,
       profileform: {
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
+        callForward: [],
         delivery: false,
         type: [],
         resource: '',
@@ -70,6 +92,17 @@ export default {
   },
   methods: {
     onSubmit() {},
+    handleCheckAllChange(val) {
+      this.profileform.callForward = val ? callforwardOptions : [];
+      this.isIndeterminate = false;
+      console.log(this.profileform.callForward);
+    },
+    handlecheckedOptionsChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.options.length;
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.options.length;
+    },
   },
 };
 </script>
