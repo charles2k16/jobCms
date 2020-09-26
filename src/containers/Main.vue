@@ -34,7 +34,8 @@
         <div class="flex mr-15">
           <el-input
             placeholder="Search"
-            v-model="input"
+            v-model="search"
+            @change="globalSearchEvent"
             class="head-search-input"
           ></el-input>
           <div class="ml-2 pr-2 flex">
@@ -71,14 +72,11 @@
 import SideBar from './SideBar';
 
 export default {
-  props: {
-    source: String,
-  },
   components: {
     SideBar,
   },
   data: () => ({
-    input: '',
+    search: '',
     pageTitle: '',
     pageSubTitle: 'Profile',
   }),
@@ -98,6 +96,10 @@ export default {
     splitRouteName(name) {
       let newName = name.split('-');
       return newName;
+    },
+    globalSearchEvent(searchValue) {
+      console.log(searchValue);
+      this.$eventbus.$emit('searchParam', searchValue);
     },
   },
 };
