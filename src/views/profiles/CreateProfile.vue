@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <el-form
       ref="profileform"
       :model="profileform"
@@ -29,20 +29,20 @@
             }}</el-checkbox>
           </el-checkbox-group>
         </div>
-
+        <br />
         <el-checkbox
-          :indeterminate="isIndeterminate"
-          v-model="checkAll"
-          @change="handleCheckAllChange"
+          :indeterminate="promtIndeterminate"
+          v-model="checkAllPrompt"
+          @change="handlePromptCheckAll"
           >On Prompt</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
-            v-model="profileform.callForward"
-            @change="handlecheckedOptionsChange"
+            v-model="profileform.prompt"
+            @change="promptOptionsChange"
           >
-            <el-checkbox v-for="cf in options" :label="cf" :key="cf">{{
-              cf
+            <el-checkbox v-for="p in promptOptions" :label="p" :key="p">{{
+              p
             }}</el-checkbox>
           </el-checkbox-group>
         </div>
@@ -55,13 +55,12 @@
           v-model="profileform.desc"
         ></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" size="small" @click="onSubmit"
-          >Save</el-button
-        >
-        <el-button size="small">Cancel</el-button>
-      </el-form-item>
+      <br />
     </el-form>
+    <div style="text-align: right;" class="mt-4 mr-8">
+      <el-button type="primary" size="small" @click="onSubmit">Save</el-button>
+      <el-button size="small">Cancel</el-button>
+    </div>
   </div>
 </template>
 
@@ -76,16 +75,16 @@ export default {
   data() {
     return {
       checkAll: false,
-      checkedOptions: ['On Unanswer'],
+      checkAllPrompt: false,
       options: callforwardOptions,
+      promptOptions: ['On Busy', 'On Unanswer', 'On Inactive', 'Unconditional'],
       isIndeterminate: false,
+      promtIndeterminate: false,
       newProfile: null,
       profileform: {
         name: '',
         callForward: [],
-        delivery: false,
-        type: [],
-        resource: '',
+        prompt: [],
         desc: '',
       },
     };
@@ -102,6 +101,17 @@ export default {
       this.checkAll = checkedCount === this.options.length;
       this.isIndeterminate =
         checkedCount > 0 && checkedCount < this.options.length;
+    },
+    handlePromptCheckAll(val) {
+      this.profileform.prompt = val ? this.promptOptions : [];
+      this.promtIndeterminate = false;
+      console.log(this.profileform.prompt);
+    },
+    promptOptionsChange(value) {
+      let checkedCount = value.length;
+      this.checkAllPrompt = checkedCount === this.promptOptions.length;
+      this.promtIndeterminate =
+        checkedCount > 0 && checkedCount < this.promptOptions.length;
     },
   },
 };
