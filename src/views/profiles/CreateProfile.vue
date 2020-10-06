@@ -17,7 +17,7 @@
         <span>Status</span>
 
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="profileform.status">
+          <el-checkbox-group v-model="profileform.status" :max="1">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="canceled"></el-checkbox>
@@ -32,6 +32,7 @@
               <el-dropdown-menu slot="dropdown" class="status-dropdown">
                 <el-dropdown-item>
                   <el-checkbox
+                    checked
                     label="inbound"
                     v-model="profileform.status"
                   ></el-checkbox>

@@ -34,7 +34,7 @@
         <span>Status</span>
 
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="subcriberform.status">
+          <el-checkbox-group v-model="subcriberform.status" :max="1">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
