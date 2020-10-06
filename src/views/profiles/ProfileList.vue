@@ -9,7 +9,6 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column prop="name" label="Profile" />
-         <el-table-column prop="notes" label="Notes" />
         <el-table-column label="Features" align="center">
           <!-- <template slot-scope="props">
             <div>
@@ -96,7 +95,7 @@
 </template>
 
 <script>
-import profileService from "../../api/profile"
+import profileService from '../../api/profile';
 
 export default {
   name: 'profileList',
@@ -167,11 +166,12 @@ export default {
     //   this.profileList = this.profiles;
     // },
     getProfileList() {
-      profileService.getProfileList()
+      profileService
+        .getProfileList()
         .then((response) => {
-          this.profileList = response
+          this.profileList = response;
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => console.log(errors));
     },
     onSubmit() {
       console.log('submit!');
