@@ -57,9 +57,23 @@
             v-model="profileform.starDial"
             @change="checkOptionChange($event, 'star-dial')"
           >
-            <el-checkbox v-for="sd in starDialOptions" :label="sd" :key="sd">{{
-              sd
-            }}</el-checkbox>
+            <el-checkbox label="unknown-origin-deal"></el-checkbox>
+
+            <el-dropdown class="ml-3">
+              <span class="el-dropdown-link">
+                <b
+                  >call-forward <i class="el-icon-arrow-down el-icon--right"></i
+                ></b>
+              </span>
+              <el-dropdown-menu slot="dropdown" class="status-dropdown">
+                <el-dropdown-item>
+                  <el-checkbox
+                    label="active"
+                    v-model="profileform.starDial"
+                  ></el-checkbox>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </el-checkbox-group>
         </div>
 
@@ -119,6 +133,27 @@
             >
           </el-checkbox-group>
         </div>
+
+        <!-- Timeouts -->
+        <el-checkbox
+          :indeterminate="timeoutIndeterminate"
+          v-model="checkAllTimeouts"
+          @change="checkAllOptions($event, 'time-out')"
+          >Timeouts Call</el-checkbox
+        >
+        <div style="margin-left: 35px;">
+          <el-checkbox-group
+            v-model="profileform.timeOuts"
+            @change="checkOptionChange($event, 'time-out')"
+          >
+            <el-checkbox
+              v-for="out in timeoutOptions"
+              :label="out"
+              :key="out"
+              >{{ out }}</el-checkbox
+            >
+          </el-checkbox-group>
+        </div>
       </el-form-item>
       <el-form-item label="Notes">
         <el-input
@@ -148,6 +183,7 @@ export default {
       checkAllPrompt: false,
       checkAllStarDial: false,
       checkAllOutgoing: false,
+      checkAllTimeouts: false,
       options: ['on-busy', 'no-answer', 'unconditional', 'on-inactive'],
       profileStatus: [
         'active',
@@ -159,10 +195,12 @@ export default {
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
       starDialOptions: ['unknown-origin-deal', 'call-forward'],
       outgoingOptions: ['unknown-origin-deal'],
+      timeoutOptions: ['unknow-calls'],
       isIndeterminate: false,
       promtIndeterminate: false,
       sdIndeterminate: false,
       outIndeterminate: false,
+      timeoutIndeterminate: false,
       profileform: {
         name: '',
         status: [],

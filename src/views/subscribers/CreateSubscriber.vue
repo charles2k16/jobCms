@@ -6,14 +6,9 @@
       label-width="120px"
       style="width: 70%"
     >
-      <el-form-item label="MSISDN">
-        <el-input v-model="subcriberform.msisdn"></el-input>
-      </el-form-item>
-
       <el-form-item label="Profile">
         <el-select
           v-model="subcriberform.profileName"
-          multiple
           filterable
           remote
           reserve-keyword
@@ -42,7 +37,6 @@
           <el-checkbox-group v-model="subcriberform.status">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
-            <el-checkbox label="canceled"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
 
             <el-dropdown class="ml-3">
@@ -143,18 +137,6 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="Settings">
-        <el-checkbox-group v-model="subcriberform.type">
-          <el-checkbox label="ACTIVE (ACT)" name="type"></el-checkbox><br />
-          <el-checkbox label="SUSPENDED (SUS)" name="type"></el-checkbox><br />
-          <el-checkbox
-            label="DETACHED SUBSCRIBERS (DTS)"
-            name="type"
-          ></el-checkbox
-          ><br />
-        </el-checkbox-group>
-      </el-form-item>
-
       <el-form-item label="Notes">
         <el-input
           type="textarea"
@@ -181,13 +163,6 @@ export default {
       checkAllStarDial: false,
       checkAllOutgoing: false,
       options: ['on-busy', 'no-answer', 'unconditional', 'on-inactive'],
-      profileStatus: [
-        'active',
-        'suspended',
-        'canceled',
-        'do-not-disturb',
-        'block-calls',
-      ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
       starDialOptions: ['unknown-origin-deal', 'call-forward'],
       outgoingOptions: ['unknown-origin-deal'],
