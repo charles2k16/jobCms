@@ -1,10 +1,13 @@
 <template>
   <el-container style="height: 100vh;">
     <el-header class="header-nav">
-      <div class="flex-justify-between ">
-        <span>
-          <img src="../assets/images/paic.png" alt="logo" />
-        </span>
+      <div class="flex-justify-between">
+        <a href="/">
+          <span>
+            <img src="../assets/images/paic.png" alt="logo" />
+          </span>
+        </a>
+
         <el-dropdown trigger="hover" class="ml-2">
           <span class="flex header-user el-dropdown-link">
             <span class="mr-2 mt-2">
