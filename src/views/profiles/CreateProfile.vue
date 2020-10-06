@@ -17,10 +17,31 @@
         <span>Status</span>
 
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="profileform.status" :min="1" :max="2">
-            <el-checkbox v-for="st in profileStatus" :label="st" :key="st">{{
-              st
-            }}</el-checkbox>
+          <el-checkbox-group v-model="profileform.status">
+            <el-checkbox label="active"></el-checkbox>
+            <el-checkbox label="suspended"></el-checkbox>
+            <el-checkbox label="canceled"></el-checkbox>
+            <el-checkbox label="do-not-disturb"></el-checkbox>
+
+            <el-dropdown class="ml-3">
+              <span class="el-dropdown-link">
+                <b
+                  >block-calls <i class="el-icon-arrow-down el-icon--right"></i
+                ></b>
+              </span>
+              <el-dropdown-menu slot="dropdown" class="status-dropdown">
+                <el-dropdown-item>
+                  <el-checkbox
+                    label="inbound"
+                    v-model="profileform.status"
+                  ></el-checkbox>
+                  <el-checkbox
+                    label="outbound"
+                    v-model="profileform.status"
+                  ></el-checkbox>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </el-checkbox-group>
         </div>
 
@@ -142,7 +163,6 @@ export default {
       promtIndeterminate: false,
       sdIndeterminate: false,
       outIndeterminate: false,
-      newProfile: null,
       profileform: {
         name: '',
         status: [],

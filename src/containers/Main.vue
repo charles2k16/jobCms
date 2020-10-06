@@ -13,7 +13,7 @@
             <span class="mr-2" style="color:white">John Doe</span>
             <span><i class="el-icon-arrow-down" style="color:white"></i></span>
           </span>
-          <el-dropdown-menu slot="dropdown" style="top:30px !important;">
+          <el-dropdown-menu slot="dropdown" class="nav-dropdown-menu">
             <el-dropdown-item icon="el-icon-user">Profile</el-dropdown-item>
             <el-dropdown-item icon="el-icon-switch-button"
               >Logout</el-dropdown-item
