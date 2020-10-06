@@ -102,3 +102,9 @@ a {
 .header-user:hover {
   cursor: pointer;
 }
+
+.create-user-wrapper {
+  display:flex;
+  justify-content: center;
+  
+}

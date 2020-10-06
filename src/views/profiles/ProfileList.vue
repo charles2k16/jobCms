@@ -9,8 +9,9 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column prop="name" label="Profile" />
+         <el-table-column prop="notes" label="Notes" />
         <el-table-column label="Features" align="center">
-          <template slot-scope="props">
+          <!-- <template slot-scope="props">
             <div>
               <span
                 style="margin-right:20px"
@@ -26,7 +27,7 @@
                   ></i></span
               ></span>
             </div>
-          </template>
+          </template> -->
         </el-table-column>
         <el-table-column prop="subscribers" label="Subscribers" align="center">
         </el-table-column>
@@ -95,6 +96,8 @@
 </template>
 
 <script>
+import profileService from "../../api/profile"
+
 export default {
   name: 'profileList',
   data() {
@@ -145,23 +148,30 @@ export default {
     this.getProfileList();
   },
   methods: {
-    getProfileList() {
-      let self = this;
-      this.profiles.map(function(profile) {
-        profile.callForward =
-          profile.callForward == 'unconditional'
-            ? 'CFU'
-            : profile.callForward == 'on-busy'
-            ? 'CFB'
-            : profile.callForward == 'on-unanswer'
-            ? 'CFNRC'
-            : profile.callForward == 'on-inactive'
-            ? 'CFNRY'
-            : 'none';
+    // getProfileList() {
+    //   let self = this;
+    //   this.profiles.map(function(profile) {
+    //     profile.callForward =
+    //       profile.callForward == 'unconditional'
+    //         ? 'CFU'
+    //         : profile.callForward == 'on-busy'
+    //         ? 'CFB'
+    //         : profile.callForward == 'on-unanswer'
+    //         ? 'CFNRC'
+    //         : profile.callForward == 'on-inactive'
+    //         ? 'CFNRY'
+    //         : 'none';
 
-        profile.features = self.getFeatures(profile.callForward);
-      });
-      this.profileList = this.profiles;
+    //     profile.features = self.getFeatures(profile.callForward);
+    //   });
+    //   this.profileList = this.profiles;
+    // },
+    getProfileList() {
+      profileService.getProfileList()
+        .then((response) => {
+          this.profileList = response
+        })
+        .catch((errors) => console.log(errors))
     },
     onSubmit() {
       console.log('submit!');

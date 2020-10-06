@@ -1,17 +1,14 @@
 <template>
-  <div>
+  <div class="create-user-wrapper">
     <el-form
       ref="userform"
       :model="userform"
       label-width="120px"
-      style="width: 50%"
+      label-position="top"
+      style="width: 40%"
     >
       <el-form-item label="Name">
         <el-input v-model="userform.user" placeholder="Enter name"></el-input>
-      </el-form-item>
-
-      <el-form-item label="User Type">
-        <el-input v-model="userform.type" placeholder="user type"></el-input>
       </el-form-item>
 
       <el-form-item label="Password">
@@ -20,40 +17,39 @@
           v-model="userform.password"
           placeholder="*********"
         ></el-input>
-        <br />
-        <el-input
-          class="mt-2"
-          type="password"
-          placeholder="*********"
-          v-model="userform.password_confirm"
-        ></el-input>
       </el-form-item>
-
-      <el-form-item>
-        <el-button size="small" type="primary" @click="onSubmit"
+      <div style="text-align: right;">
+      <el-button size="small" type="primary" @click="saveUser"
           >Save</el-button
         >
         <el-button size="small">Cancel</el-button>
-      </el-form-item>
+    </div>
     </el-form>
+
+    
   </div>
 </template>
 
 <script>
+import userService from "../../api/users"
+
 export default {
   data() {
     return {
       userform: {
         user: '',
-        type: '',
         password: '',
-        password_confirm: '',
       },
     };
   },
   methods: {
-    onSubmit() {
-      console.log('submit!');
+    saveUser() {
+      userService.createUser(this.userform)
+        .then(()=> {
+          this.successMessage('User created successfully')
+          this.$router.push("/users")
+        })
+      .catch((error) => console.log(error.message))
     },
   },
 };

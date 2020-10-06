@@ -9,8 +9,12 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column prop="user" label="User" />
-        <el-table-column label="User Type" prop="type"> </el-table-column>
-        <el-table-column prop="login" label="login"> </el-table-column>
+        <el-table-column label="Status" prop="status">
+          <template slot-scope="props"> 
+            <el-tag :type="props.status !== true ? 'success' : 'info'" size="mini">Active</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="dateCreated" label="Created"> </el-table-column>
       </el-table>
     </el-card>
     <div style="text-align: right;" class="mt-4 mr-8" v-show="actionButtons">
@@ -28,11 +32,7 @@
     >
       <el-form ref="userform" :model="userform" label-position="left">
         <el-form-item label="Name">
-          <el-input v-model="userform.user" placeholder="Enter name"></el-input>
-        </el-form-item>
-
-        <el-form-item label="User Type">
-          <el-input v-model="userform.type" placeholder="user type"></el-input>
+          <el-input v-model="userform.user" disabled></el-input>
         </el-form-item>
 
         <el-form-item label="Password">
@@ -41,17 +41,11 @@
             v-model="userform.password"
             placeholder="*********"
           ></el-input>
-          <br />
-          <el-input
-            class="mt-2"
-            type="password"
-            placeholder="*********"
-            v-model="userform.password_confirm"
-          ></el-input>
+          
         </el-form-item>
 
         <el-form-item>
-          <el-button size="small" type="primary" @click="onSubmit"
+          <el-button size="small" type="primary" @click="editUser"
             >Save</el-button
           >
           <el-button size="small">Cancel</el-button>
@@ -62,6 +56,8 @@
 </template>
 
 <script>
+import userService from "../../api/users"
+
 export default {
   name: 'profileList',
   data() {
@@ -72,45 +68,41 @@ export default {
       userList: [],
       userform: {
         user: '',
-        type: '',
-        password: '',
-        password_confirm: '',
+        password: ''
       },
-      users: [
-        {
-          user: 'Adams',
-          type: 'editor',
-          login: '31/08/2020',
-        },
-        {
-          user: 'Johnson',
-          type: 'admin',
-          login: '31/08/2020',
-        },
-        {
-          user: 'Charles',
-          type: 'Super Admin',
-          login: '31/08/2020',
-        },
-      ],
+      users: [],
     };
   },
+  created() {
+    this.getUsers()
+  },
   methods: {
+    getUsers() {
+      userService.getAllUsers()
+         .then((response) => {
+          this.users = response
+        })
+        .catch((errors) => console.log(errors))
+    },
     handleSelectionChange(selectedProfile) {
       this.actionButtons = selectedProfile.length > 0 ? true : false;
       this.userSelected = selectedProfile;
     },
-    onSubmit() {
-      console.log('submit!');
+    editUser() {
+      userService.updateUser(this.userform)
+        .then(() => {
+          this.successMessage("User updated succesfully")
+          this.showEditModal = false;
+          this.$refs.usersTable.clearSelection();
+        })
+        .catch((errors) => console.log(errors))
     },
     editProfile() {
       if (this.userSelected.length > 1) {
         this.errorMessage("Can't edit when two users are selected");
       } else {
         this.userform.user = this.userSelected[0].user;
-        this.userform.type = this.userSelected[0].type;
         this.userform.password = this.userSelected[0].password;
-        this.userform.password_confirm = this.userSelected[0].password_confirm;
         this.showEditModal = true;
       }
     },

@@ -2,10 +2,10 @@ import axios from "axios";
 import config from "../config";
 
 export default {
-  name: "ProfileService",
+  name: "userService",
 
-  getProfileList() {
-    let url = config.PROFILE_URL
+  getAllUsers() {
+    let url = config.USERS_URL + "/getAll"
     return axios.get(url, {
       auth: {
         username: 'default',
@@ -15,14 +15,25 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
-  createProfile(profile) {
-    let url = config.PROFILE_URL
-    return axios.post(url, profile, {
+  createUser(user) {
+    let url = config.USERS_URL + "/save"
+    return axios.post(url, user, {
       auth: {
         username: 'default',
         password: '$PAiC2020@'
       }
     })
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
+  updateUser(user) {
+      let url = config.USERS_URL + "/edit"
+      return axios.put(url, user, {
+        auth: {
+          username: 'default',
+          password: '$PAiC2020@'
+        }
+      })
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }

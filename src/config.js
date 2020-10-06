@@ -9,5 +9,6 @@ function getApiUrl () {
 const API_URL = getApiUrl();
 
 export default {
-  PROFILE_URL: API_URL + "profile"
+  PROFILE_URL: API_URL + "profile",
+  USERS_URL: API_URL + "user"
 }

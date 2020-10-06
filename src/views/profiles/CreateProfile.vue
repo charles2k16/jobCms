@@ -52,19 +52,21 @@
         <el-input
           type="textarea"
           :autosize="{ minRows: 2, maxRows: 4 }"
-          v-model="profileform.desc"
+          v-model="profileform.notes"
         ></el-input>
       </el-form-item>
       <br />
     </el-form>
     <div style="text-align: right;" class="mt-4 mr-8">
-      <el-button type="primary" size="small" @click="onSubmit">Save</el-button>
+      <el-button type="primary" size="small" @click="addProfile">Save</el-button>
       <el-button size="small">Cancel</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import profileService from "../../api/profile"
+
 const callforwardOptions = [
   'On Busy',
   'On Unanswer',
@@ -85,12 +87,20 @@ export default {
         name: '',
         callForward: [],
         prompt: [],
-        desc: '',
+        notes: '',
       },
     };
   },
   methods: {
-    onSubmit() {},
+    addProfile () {
+      console.log(this.profileform)
+      profileService.createProfile(this.profileform)
+        .then(()=> {
+          this.successMessage('Profile created successfully')
+          this.$router.push("/profiles")
+        })
+        .catch((error) => console.log(error.message))
+    },
     handleCheckAllChange(val) {
       this.profileform.callForward = val ? callforwardOptions : [];
       this.isIndeterminate = false;
