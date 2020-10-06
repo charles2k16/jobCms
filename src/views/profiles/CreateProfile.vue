@@ -10,27 +10,31 @@
         <el-input v-model="profileform.name"></el-input>
       </el-form-item>
 
-      <el-form-item label="Status">
-        <el-select v-model="profileform.status">
-          <el-option v-for="s in profileStatus" :key="s" :label="s" :value="s">
-          </el-option>
-        </el-select>
-      </el-form-item>
-
       <el-form-item label="Features">
         <br />
+
+        <!-- Status -->
+        <span>Status</span>
+
+        <div style="margin-left: 35px;">
+          <el-checkbox-group v-model="profileform.status" :min="1" :max="2">
+            <el-checkbox v-for="st in profileStatus" :label="st" :key="st">{{
+              st
+            }}</el-checkbox>
+          </el-checkbox-group>
+        </div>
 
         <!-- start Dial -->
         <el-checkbox
           :indeterminate="sdIndeterminate"
           v-model="checkAllStarDial"
-          @change="handleStarDialCheck"
+          @change="checkAllOptions($event, 'star-dial')"
           >Star Dial</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
             v-model="profileform.starDial"
-            @change="starDialOptionsChange"
+            @change="checkOptionChange($event, 'star-dial')"
           >
             <el-checkbox v-for="sd in starDialOptions" :label="sd" :key="sd">{{
               sd
@@ -42,13 +46,13 @@
         <el-checkbox
           :indeterminate="isIndeterminate"
           v-model="checkAll"
-          @change="handleCheckAllChange"
+          @change="checkAllOptions($event, 'call-forward')"
           >Call Forwarding</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
             v-model="profileform.callForward"
-            @change="handlecheckedOptionsChange"
+            @change="checkOptionChange($event, 'call-forward')"
           >
             <el-checkbox v-for="cf in options" :label="cf" :key="cf">{{
               cf
@@ -60,21 +64,41 @@
         <el-checkbox
           :indeterminate="promtIndeterminate"
           v-model="checkAllPrompt"
-          @change="handlePromptCheckAll"
+          @change="checkAllOptions($event, 'on-prompt')"
           >On Prompt</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
             v-model="profileform.prompts"
-            @change="promptOptionsChange"
+            @change="checkOptionChange($event, 'on-prompt')"
           >
             <el-checkbox v-for="p in promptOptions" :label="p" :key="p">{{
               p
             }}</el-checkbox>
           </el-checkbox-group>
         </div>
+
+        <!-- Outgioing calls -->
+        <el-checkbox
+          :indeterminate="outIndeterminate"
+          v-model="checkAllOutgoing"
+          @change="checkAllOptions($event, 'out-going')"
+          >Out-going Call</el-checkbox
+        >
+        <div style="margin-left: 35px;">
+          <el-checkbox-group
+            v-model="profileform.outgoingCall"
+            @change="checkOptionChange($event, 'out-going')"
+          >
+            <el-checkbox
+              v-for="outgoing in outgoingOptions"
+              :label="outgoing"
+              :key="outgoing"
+              >{{ outgoing }}</el-checkbox
+            >
+          </el-checkbox-group>
+        </div>
       </el-form-item>
-      <br /><br /><br /><br />
       <el-form-item label="Notes">
         <el-input
           type="textarea"
@@ -102,6 +126,7 @@ export default {
       checkAll: false,
       checkAllPrompt: false,
       checkAllStarDial: false,
+      checkAllOutgoing: false,
       options: ['on-busy', 'no-answer', 'unconditional', 'on-inactive'],
       profileStatus: [
         'active',
@@ -116,15 +141,16 @@ export default {
       isIndeterminate: false,
       promtIndeterminate: false,
       sdIndeterminate: false,
+      outIndeterminate: false,
       newProfile: null,
       profileform: {
         name: '',
-        status: '',
+        status: [],
         callForward: [],
         prompts: [],
         starDial: [],
         outgoingCall: [],
-        timeOuts: 'dial-call-timeout',
+        timeOuts: [],
         notes: '',
       },
     };
@@ -139,35 +165,43 @@ export default {
         })
         .catch((error) => console.log(error.message));
     },
-    handleCheckAllChange(value) {
-      this.profileform.callForward = value ? this.options : [];
-      this.isIndeterminate = false;
+    checkAllOptions(val, type) {
+      if (type == 'star-dial') {
+        this.profileform.starDial = val ? this.starDialOptions : [];
+        this.sdIndeterminate = false;
+      } else if (type == 'call-forward') {
+        this.profileform.callForward = val ? this.options : [];
+        this.isIndeterminate = false;
+      } else if (type == 'on-prompt') {
+        this.profileform.prompts = val ? this.promptOptions : [];
+        this.promtIndeterminate = false;
+      } else if (type == 'out-going') {
+        this.profileform.outgoingCall = val ? this.outgoingOptions : [];
+        this.outIndeterminate = false;
+      }
     },
-    handlecheckedOptionsChange(value) {
+    checkOptionChange(value, type) {
       let checkedCount = value.length;
-      this.checkAll = checkedCount === this.options.length;
-      this.isIndeterminate =
-        checkedCount > 0 && checkedCount < this.options.length;
-    },
-    handlePromptCheckAll(val) {
-      this.profileform.prompts = val ? this.promptOptions : [];
-      this.promtIndeterminate = false;
-    },
-    promptOptionsChange(value) {
-      let checkedCount = value.length;
-      this.checkAllPrompt = checkedCount === this.promptOptions.length;
-      this.promtIndeterminate =
-        checkedCount > 0 && checkedCount < this.promptOptions.length;
-    },
-    handleStarDialCheck(val) {
-      this.profileform.starDial = val ? this.starDialOptions : [];
-      this.sdIndeterminate = false;
-    },
-    starDialOptionsChange(value) {
-      let checkedCount = value.length;
-      this.checkAllStarDial = checkedCount === this.starDialOptions.length;
-      this.sdIndeterminate =
-        checkedCount > 0 && checkedCount < this.starDialOptions.length;
+
+      if (type == 'star-dial') {
+        this.checkAllStarDial = checkedCount === this.starDialOptions.length;
+        this.sdIndeterminate =
+          checkedCount > 0 && checkedCount < this.starDialOptions.length;
+      } else if (type == 'call-forward') {
+        this.checkAll = checkedCount === this.options.length;
+        this.isIndeterminate =
+          checkedCount > 0 && checkedCount < this.options.length;
+      } else if (type == 'on-prompt') {
+        this.checkAllPrompt = checkedCount === this.promptOptions.length;
+        this.promtIndeterminate =
+          checkedCount > 0 && checkedCount < this.promptOptions.length;
+      } else if (type == 'out-going') {
+        this.checkAllOutgoing = checkedCount === this.outgoingOptions.length;
+        this.outIndeterminate =
+          checkedCount > 0 && checkedCount < this.outgoingOptions.length;
+      } else if (type == 'status') {
+        console.log(this.profileform.status);
+      }
     },
   },
 };
