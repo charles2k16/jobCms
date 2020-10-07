@@ -140,7 +140,7 @@
           :indeterminate="timeoutIndeterminate"
           v-model="checkAllTimeouts"
           @change="checkAllOptions($event, 'time-out')"
-          >Timeouts Call</el-checkbox
+          >Timeout</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
@@ -231,7 +231,7 @@ export default {
       } else if (type == 'call-forward') {
         this.profileform.callForward = val ? this.options : [];
         this.isIndeterminate = false;
-      } else if (type == 'on-prompt') {
+      } else if (type == 'prompt') {
         this.profileform.prompts = val ? this.promptOptions : [];
         this.promtIndeterminate = false;
       } else if (type == 'out-going') {
@@ -250,7 +250,7 @@ export default {
         this.checkAll = checkedCount === this.options.length;
         this.isIndeterminate =
           checkedCount > 0 && checkedCount < this.options.length;
-      } else if (type == 'on-prompt') {
+      } else if (type == 'prompt') {
         this.checkAllPrompt = checkedCount === this.promptOptions.length;
         this.promtIndeterminate =
           checkedCount > 0 && checkedCount < this.promptOptions.length;
