@@ -13,14 +13,6 @@ export default {
     }
     return a
   },
-
-  getFeatures() {
-    //TODO: Getting the features available for call-forwarding
-  },
-  getSettings() {
-    //status
-    //TODO: Getting the status catalogue
-  },
   getProfileList() {
     let url = config.PROFILE_URL;
     return axios

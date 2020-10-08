@@ -73,6 +73,7 @@
       <el-form ref="subcriberform" :model="subcriberform" label-width="100px">
         <el-form-item label="MSISDN">
           <el-input
+            type="number"
             v-model="subcriberform.msisdn"
             :disabled="disabled"
           ></el-input>

@@ -8,7 +8,7 @@
     >
       <el-form-item label="Msisdn">
         <el-input
-          type="text"
+          type="number"
           v-model="sub.msisdn"
           placeholder="enter your msisdn"
         />
