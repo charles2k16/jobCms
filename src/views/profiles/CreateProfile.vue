@@ -14,7 +14,12 @@
         <br />
 
         <!-- Status -->
-        <span>Status</span>
+        <!-- <span>Status</span> -->
+        <el-checkbox
+          :indeterminate="sdIndeterminate"
+          v-model="checkAllStarDial"
+          @change="checkAllOptions($event, 'statusl')"
+        >Status</el-checkbox>
 
         <div style="margin-left: 35px;">
           <el-checkbox-group v-model="profileform.status" :max="1">
@@ -39,11 +44,31 @@
             v-model="profileform.starDial"
             @change="checkOptionChange($event, 'star-dial')"
           >
+<<<<<<< HEAD
             <el-checkbox label="unknown-origin-deal"></el-checkbox>
             <el-checkbox label="callforward:active">
               callforward:active
               <input type="text" placeholder="enter regex number"
             /></el-checkbox>
+=======
+            <el-checkbox label="unknown-origin-dial"></el-checkbox>
+
+            <el-dropdown class="ml-3">
+              <span class="el-dropdown-link">
+                <b
+                  >call-forward <i class="el-icon-arrow-down el-icon--right"></i
+                ></b>
+              </span>
+              <el-dropdown-menu slot="dropdown" class="status-dropdown">
+                <el-dropdown-item>
+                  <el-checkbox
+                    label="active"
+                    v-model="profileform.starDial"
+                  ></el-checkbox>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+>>>>>>> 28dd2792ae362d59f2e3165d21bdaaebce990bcc
           </el-checkbox-group>
         </div>
 

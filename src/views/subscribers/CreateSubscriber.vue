@@ -108,13 +108,13 @@
         <el-checkbox
           :indeterminate="promtIndeterminate"
           v-model="checkAllPrompt"
-          @change="checkAllOptions($event, 'on-prompt')"
+          @change="checkAllOptions($event, 'prompt')"
           >On Prompt</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
             v-model="subcriberform.prompts"
-            @change="checkOptionChange($event, 'on-prompt')"
+            @change="checkOptionChange($event, 'prompt')"
           >
             <el-checkbox v-for="p in promptOptions" :label="p" :key="p">{{
               p
