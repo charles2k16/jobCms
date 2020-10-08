@@ -4,6 +4,16 @@ import config from "../config";
 export default {
   name: "ProfileService",
 
+  basicAuth() {
+    let a = {
+      auth: {
+        username: "default",
+        password: "$PAiC2020@"
+      }
+    }
+    return a
+  },
+
   getFeatures() {
     //TODO: Getting the features available for call-forwarding
   },
@@ -47,5 +57,11 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-
+  applyProfile(profileId) {
+    let self = this;
+    let url = config.PROFILE_URL + profileId + '/apply'
+    return axios.head(url, self.basicAuth)
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
+  },
 };

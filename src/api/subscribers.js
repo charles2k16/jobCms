@@ -4,6 +4,16 @@ import config from "../config";
 export default {
   name: "SubscriberService",
 
+  basicAuth() {
+    let a = {
+      auth: {
+        username: "default",
+        password: "$PAiC2020@"
+      }
+    }
+    return a
+  },
+
   createSubscriber(subscriber) {
     let url = config.SUBSCRIBERS_URL
     return axios
@@ -53,14 +63,10 @@ export default {
       .catch(error => Promise.reject(error));
   },
   getAllSubscriber() {
+    let self = this
     let url = config.SUBSCRIBERS_URL
     return axios
-      .get(url, {
-        auth: {
-          username: "default",
-          password: "$PAiC2020@"
-        }
-      })
+      .get(url, self.basicAuth)
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
