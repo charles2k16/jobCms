@@ -173,8 +173,8 @@ export default {
         'on-inactive: msisdn-on-active',
       ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
-      starDialOptions: ['unknown-origin-deal', 'call-forward'],
-      outgoingOptions: ['unknown-origin-deal'],
+      starDialOptions: ['unknown-origin-dial', 'call-forward'],
+      outgoingOptions: ['unknown-origin-dial'],
       isIndeterminate: false,
       promtIndeterminate: false,
       sdIndeterminate: false,
@@ -236,7 +236,7 @@ export default {
       } else if (type == 'call-forward') {
         this.subcriberform.callForward = val ? this.options : [];
         this.isIndeterminate = false;
-      } else if (type == 'on-prompt') {
+      } else if (type == 'prompt') {
         this.subcriberform.prompts = val ? this.promptOptions : [];
         this.promtIndeterminate = false;
       } else if (type == 'out-going') {
