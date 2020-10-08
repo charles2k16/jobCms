@@ -39,6 +39,7 @@
             <el-checkbox label="do-not-disturb"></el-checkbox>
             <el-checkbox label="block-inbound-calls"></el-checkbox>
             <el-checkbox label="block-outbound-calls"></el-checkbox>
+            <el-checkbox label="cancelled"></el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -92,7 +93,7 @@
           :indeterminate="promtIndeterminate"
           v-model="checkAllPrompt"
           @change="checkAllOptions($event, 'prompt')"
-          >On Prompt</el-checkbox
+          >Prompt</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
@@ -153,9 +154,9 @@ export default {
       checkAllStarDial: false,
       checkAllOutgoing: false,
       options: [
+        'unconditional: msisdn-on-busy',
         'on-busy: msisdn-on-busy',
         'no-answer: msisdn-no-answer',
-        'unconditional: msisdn-on-busy',
         'on-inactive: msisdn-on-active',
       ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
