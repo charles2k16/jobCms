@@ -15,6 +15,17 @@ export default {
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
+  getUser(userName) {
+    let url = config.USERS_URL + "/" + userName
+    return axios.get(url, {
+      auth: {
+        username: 'default',
+        password: '$PAiC2020@'
+      }
+    })
+      .then((response) => Promise.resolve(response.data))
+      .catch((error) => Promise.reject(error))
+  },
   createUser(user) {
     let url = config.USERS_URL + "/save"
     return axios.post(url, user, {
@@ -27,13 +38,13 @@ export default {
       .catch((error) => Promise.reject(error))
   },
   updateUser(user) {
-      let url = config.USERS_URL + "/edit"
-      return axios.put(url, user, {
-        auth: {
-          username: 'default',
-          password: '$PAiC2020@'
-        }
-      })
+    let url = config.USERS_URL + "/edit"
+    return axios.put(url, user, {
+      auth: {
+        username: 'default',
+        password: '$PAiC2020@'
+      }
+    })
       .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   }
