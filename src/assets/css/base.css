@@ -40,6 +40,11 @@ a {
   margin-top: 10px
 }
 
+.my-3 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .mt-4 {
   margin-top: 40px
 }
@@ -111,4 +116,25 @@ a {
 .option-box {
   border: 1px solid rgb(212, 206, 206);
   padding: 2px;
+}
+
+.login {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_form {
+  width: 450px;
+  border-radius: 10px;
+  padding: 25px;
+  background-color: whitesmoke;
+}
+
+.full-width {
+  width: 100%;
 }
