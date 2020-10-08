@@ -56,6 +56,9 @@
       <el-button type="info" size="mini" @click="showSubscriberForm"
         >Edit</el-button
       >
+      <el-button type="info" size="mini" @click="applyToProfile"
+        >Edit</el-button
+      >
       <el-button type="danger" size="mini" @click="confirmDeleteSub"
         >Delete</el-button
       >
@@ -236,6 +239,23 @@ export default {
           console.log(errors);
           this.btnLoading = false;
           this.errorMessage('Error editing subscribers');
+        });
+    },
+    applyToProfile() {
+      this.subSelected.map(function(sub) {
+        this.apply(sub.msisdn, sub.profile.id);
+        return sub;
+      });
+    },
+    apply(msisdn, profileid) {
+      subsService
+        .applyProfile(msisdn, profileid)
+        .then(() => {
+          this.successMessage('Applied successfully');
+        })
+        .catch((errors) => {
+          console.log(errors);
+          this.errorMessage('Error applying');
         });
     },
     showSubscriberForm() {

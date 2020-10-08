@@ -47,8 +47,5 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  applyProfile() {
-    // set profileId as a param
-    //TODO: Apply profile settings to all subscribers associated with the profile
-  }
+
 };

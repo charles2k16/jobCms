@@ -28,8 +28,17 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  applyProfile() {
-
+  applyProfile(msisdn, profileId) {
+    let url = config.SUBSCRIBERS_URL + '/profile' + profileId + '/apply'
+    return axios
+      .put(url, msisdn, {
+        auth: {
+          username: "default",
+          password: "$PAiC2020@"
+        }
+      })
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
   },
   getSubscriber() {
     //  pp subscriberId
