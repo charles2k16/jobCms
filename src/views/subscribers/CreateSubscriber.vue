@@ -96,9 +96,9 @@
               :label="cf"
               :key="cf"
               style="display:block;"
-              >{{ getOption(cf) }}:
+              >{{ getOption(cf, 0) }}:
               <span class="option-box">{{
-                getOptionParam(cf)
+                getOption(cf, 1)
               }}</span></el-checkbox
             >
           </el-checkbox-group>
@@ -270,13 +270,9 @@ export default {
         console.log(this.subcriberform.status);
       }
     },
-    getOption(options) {
+    getOption(options, param) {
       let op = options.split(':');
-      return op[0];
-    },
-    getOptionParam(options) {
-      let op = options.split(':');
-      return op[1];
+      return op[param];
     },
   },
 };
