@@ -29,8 +29,7 @@ export default {
       .catch(error => Promise.reject(error));
   },
   applyProfile() {
-    //  pp profileId
-    //TODO: Apply profile settings to the subscriber
+
   },
   getSubscriber() {
     //  pp subscriberId

@@ -174,18 +174,20 @@ export default {
       timeoutIndeterminate: false,
       profileform: {
         name: '',
-        status: [],
-        callForward: [],
-        prompts: [],
-        starDial: [],
+        settings: [{ id: 'a675509d4af14931b6e375f7a377eb79' }],
+        callForward: [{ id: '5fce9b8c1f034c67a2de41d85a4d35b7' }],
+        prompts: [{ id: '8ed63d5910f74e568d06950719c1271d' }],
+        starDial: [{ id: '75d47f43a0894a85a0e801e6666d77cd' }],
         outgoingCall: [],
         timeOuts: [],
         notes: '',
+        callForwardOnInactiveTime: 60,
       },
     };
   },
   methods: {
     addProfile() {
+      console.log(this.profileform);
       profileService
         .createProfile(this.profileform)
         .then(() => {
