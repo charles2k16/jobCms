@@ -82,10 +82,8 @@
               :key="cf"
               style="display:block;"
               >{{ getOption(cf, 0) }}:
-              <span class="option-box">{{
-                getOption(cf, 1)
-              }}</span></el-checkbox
-            >
+              <input type="text" :placeholder="getOption(cf, 1)"
+            /></el-checkbox>
           </el-checkbox-group>
         </div>
 
