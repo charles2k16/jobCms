@@ -19,19 +19,17 @@
         ></el-input>
       </el-form-item>
       <div style="text-align: right;">
-      <el-button size="small" type="primary" @click="saveUser"
+        <el-button size="small" type="primary" @click="saveUser"
           >Save</el-button
         >
         <el-button size="small">Cancel</el-button>
-    </div>
+      </div>
     </el-form>
-
-    
   </div>
 </template>
 
 <script>
-import userService from "../../api/users"
+import userService from '../../api/users';
 
 export default {
   data() {
@@ -39,17 +37,19 @@ export default {
       userform: {
         user: '',
         password: '',
+        status: false,
       },
     };
   },
   methods: {
     saveUser() {
-      userService.createUser(this.userform)
-        .then(()=> {
-          this.successMessage('User created successfully')
-          this.$router.push("/users")
+      userService
+        .createUser(this.userform)
+        .then(() => {
+          this.successMessage('User created successfully');
+          this.$router.push('/users');
         })
-      .catch((error) => console.log(error.message))
+        .catch((error) => console.log(error.message));
     },
   },
 };

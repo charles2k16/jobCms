@@ -10,8 +10,12 @@
         <el-table-column type="selection" width="55" />
         <el-table-column prop="user" label="User" />
         <el-table-column label="Status" prop="status">
-          <template slot-scope="props"> 
-            <el-tag :type="props.status !== true ? 'success' : 'info'" size="mini">Active</el-tag>
+          <template slot-scope="props">
+            <el-tag
+              :type="props.status !== true ? 'success' : 'info'"
+              size="mini"
+              >Active</el-tag
+            >
           </template>
         </el-table-column>
         <el-table-column prop="dateCreated" label="Created"> </el-table-column>
@@ -41,7 +45,6 @@
             v-model="userform.password"
             placeholder="*********"
           ></el-input>
-          
         </el-form-item>
 
         <el-form-item>
@@ -56,7 +59,7 @@
 </template>
 
 <script>
-import userService from "../../api/users"
+import userService from '../../api/users';
 
 export default {
   name: 'profileList',
@@ -68,34 +71,37 @@ export default {
       userList: [],
       userform: {
         user: '',
-        password: ''
+        password: '',
+        status: false,
       },
       users: [],
     };
   },
   created() {
-    this.getUsers()
+    this.getUsers();
   },
   methods: {
     getUsers() {
-      userService.getAllUsers()
-         .then((response) => {
-          this.users = response
+      userService
+        .getAllUsers()
+        .then((response) => {
+          this.users = response;
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => console.log(errors));
     },
     handleSelectionChange(selectedProfile) {
       this.actionButtons = selectedProfile.length > 0 ? true : false;
       this.userSelected = selectedProfile;
     },
     editUser() {
-      userService.updateUser(this.userform)
+      userService
+        .updateUser(this.userform)
         .then(() => {
-          this.successMessage("User updated succesfully")
+          this.successMessage('User updated succesfully');
           this.showEditModal = false;
           this.$refs.usersTable.clearSelection();
         })
-        .catch((errors) => console.log(errors))
+        .catch((errors) => console.log(errors));
     },
     editProfile() {
       if (this.userSelected.length > 1) {
