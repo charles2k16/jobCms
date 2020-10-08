@@ -173,57 +173,40 @@ export default {
         notes: 'Hello !!',
         callForwardOnInactiveTime: 60,
       },
-      subscribers: [
-        {
-          msisdn: '(972) 5555-0123',
-          profileName: 'John Doe',
-          status: 'active',
-          callForward: 'unconditional',
-          startDial: 'unknown',
-          prompt: 'on-active',
-        },
-        {
-          msisdn: '(972) 5555-0123',
-          profileName: 'Doe John',
-          status: 'active',
-          callForward: 'on-unanswer',
-          startDial: 'unknown',
-          prompt: 'on-active',
-        },
-        {
-          msisdn: '(972) 5555-0123',
-          profileName: 'Mike Son',
-          status: 'active',
-          callForward: 'on-busy',
-          startDial: 'unknown',
-          prompt: 'on-active',
-        },
-      ],
     };
   },
   created() {
     this.getSubscriberList();
   },
   methods: {
+    // getSubscriberList() {
+    //   let self = this;
+    //   this.subscribers.map(function(sub) {
+    //     sub.callForward =
+    //       sub.callForward == 'unconditional'
+    //         ? 'CFU'
+    //         : sub.callForward == 'on-busy'
+    //         ? 'CFB'
+    //         : sub.callForward == 'on-unanswer'
+    //         ? 'CFNRC'
+    //         : sub.callForward == 'on-inactive'
+    //         ? 'CFNRY'
+    //         : 'none';
+
+    //     sub.features = self.getFeatures(sub.callForward);
+    //   });
+
+    //   this.subcriberList = this.subscribers;
+    // },
     getSubscriberList() {
-      let self = this;
-      this.subscribers.map(function(sub) {
-        sub.callForward =
-          sub.callForward == 'unconditional'
-            ? 'CFU'
-            : sub.callForward == 'on-busy'
-            ? 'CFB'
-            : sub.callForward == 'on-unanswer'
-            ? 'CFNRC'
-            : sub.callForward == 'on-inactive'
-            ? 'CFNRY'
-            : 'none';
-
-        sub.features = self.getFeatures(sub.callForward);
-      });
-
-      this.subcriberList = this.subscribers;
+      subsService
+        .getAllSubscriber()
+        .then((response) => {
+          this.subcriberList = response;
+        })
+        .catch((errors) => console.log(errors));
     },
+
     handleSelectionChange(selectedSub) {
       this.actionButtons = selectedSub.length > 0 ? true : false;
       this.subSelected = selectedSub;

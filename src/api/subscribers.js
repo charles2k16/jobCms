@@ -53,8 +53,16 @@ export default {
       .catch(error => Promise.reject(error));
   },
   getAllSubscriber() {
-    //TODO: Get all subscribers
-
+    let url = config.SUBSCRIBERS_URL
+    return axios
+      .get(url, {
+        auth: {
+          username: "default",
+          password: "$PAiC2020@"
+        }
+      })
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
   },
 
 }
