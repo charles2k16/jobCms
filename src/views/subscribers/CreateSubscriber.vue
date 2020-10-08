@@ -6,22 +6,29 @@
       label-width="120px"
       style="width: 70%"
     >
+      <el-form-item label="Msisdn">
+        <el-input
+          type="text"
+          v-model="sub.msisdn"
+          placeholder="enter your msisdn"
+        />
+      </el-form-item>
       <el-form-item label="Profile">
         <el-select
-          v-model="subcriberform.profileName"
+          v-model="sub.profile.id"
           filterable
           remote
           reserve-keyword
           placeholder="Search a profile name"
-          :remote-method="searchProfileName"
+          :remote-method="searchProfile"
           :loading="loading"
           style="width: 100%"
         >
           <el-option
             v-for="p in searchOptions"
-            :key="p.name"
+            :key="p.id"
             :label="p.name"
-            :value="p.name"
+            :value="p.id"
           >
           </el-option>
         </el-select>
@@ -131,12 +138,16 @@
       <el-form-item label="Notes">
         <el-input
           type="textarea"
-          v-model="subcriberform.desc"
+          v-model="sub.notes"
           :autosize="{ minRows: 2, maxRows: 4 }"
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button size="small" type="primary" @click="onSubmit"
+        <el-button
+          size="small"
+          type="primary"
+          :loading="btnLoading"
+          @click="createSubscriber"
           >Save</el-button
         >
         <el-button size="small">Cancel</el-button>
@@ -146,9 +157,12 @@
 </template>
 
 <script>
+import subsService from '../../api/subscribers';
+
 export default {
   data() {
     return {
+      btnLoading: false,
       checkAll: false,
       checkAllPrompt: false,
       checkAllStarDial: false,
@@ -171,17 +185,31 @@ export default {
         {
           name: 'Profile1',
           subscribers: 2,
+          id: '8282ddhdhdhd',
         },
         {
           name: 'Profile2',
           subscribers: 2,
+          id: '635egdddddhdd',
         },
         {
           name: 'Profile3',
           subscribers: 100,
+          id: 'hdgdgd5dgdgdgdg',
         },
       ],
       loading: false,
+      sub: {
+        msisdn: '',
+        password: '',
+        profile: {
+          id: '',
+        },
+        settings: [{ id: '' }],
+        notes: '',
+        callForwardOnInactiveTime: 60,
+      },
+
       subcriberform: {
         msisdn: '',
         profileName: '',
@@ -200,10 +228,23 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      console.log('submit!');
+    createSubscriber() {
+      console.log(this.sub);
+      this.btnLoading = true;
+      subsService
+        .createSubscriber(this.sub)
+        .then(() => {
+          this.btnLoading = false;
+          this.successMessage('Subscriber created successfully');
+          this.$router.push('/subscribers');
+        })
+        .catch((errors) => {
+          console.log(errors);
+          this.btnLoading = false;
+          this.errorMessage('Error creating subscribers');
+        });
     },
-    searchProfileName(query) {
+    searchProfile(query) {
       if (query !== '') {
         this.loading = true;
         setTimeout(() => {
