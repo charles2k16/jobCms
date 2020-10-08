@@ -14,14 +14,7 @@
         <br />
 
         <!-- Status -->
-        <!-- <span>Status</span> -->
-        <el-checkbox
-          :indeterminate="sdIndeterminate"
-          v-model="checkAllStarDial"
-          @change="checkAllOptions($event, 'statusl')"
-          >Status</el-checkbox
-        >
-
+        <span>Status</span>
         <div style="margin-left: 35px;">
           <el-checkbox-group v-model="profileform.status" :max="1">
             <el-checkbox label="active"></el-checkbox>

@@ -32,32 +32,13 @@
 
         <!-- Status -->
         <span>Status</span>
-
         <div style="margin-left: 35px;">
           <el-checkbox-group v-model="subcriberform.status" :max="1">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
-
-            <el-dropdown class="ml-3">
-              <span class="el-dropdown-link">
-                <b
-                  >block-calls <i class="el-icon-arrow-down el-icon--right"></i
-                ></b>
-              </span>
-              <el-dropdown-menu slot="dropdown" class="status-dropdown">
-                <el-dropdown-item>
-                  <el-checkbox
-                    label="inbound"
-                    v-model="subcriberform.status"
-                  ></el-checkbox>
-                  <el-checkbox
-                    label="outbound"
-                    v-model="subcriberform.status"
-                  ></el-checkbox>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <el-checkbox label="block-inbound-calls"></el-checkbox>
+            <el-checkbox label="block-outbound-calls"></el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -73,9 +54,13 @@
             v-model="subcriberform.starDial"
             @change="checkOptionChange($event, 'star-dial')"
           >
-            <el-checkbox v-for="sd in starDialOptions" :label="sd" :key="sd">{{
-              sd
-            }}</el-checkbox>
+            <el-checkbox label="unknown-origin-dial"></el-checkbox>
+            <span style="margin-left:10px">
+              callforward:
+              <el-checkbox label="active">
+                active <input type="number" placeholder="enter regex number"
+              /></el-checkbox>
+            </span>
           </el-checkbox-group>
         </div>
 
@@ -176,7 +161,7 @@ export default {
         'on-inactive: msisdn-on-active',
       ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
-      starDialOptions: ['unknown-origin-dial', 'call-forward'],
+      starDialOptions: ['unknown-origin-dial', 'active'],
       outgoingOptions: ['unknown-origin-dial'],
       isIndeterminate: false,
       promtIndeterminate: false,
