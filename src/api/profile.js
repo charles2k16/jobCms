@@ -35,10 +35,11 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  updateProfile(profile) {
+  updateProfile() {
     //TODO: Update profile by Id
   },
-  applyProfile(profileId) {
+  applyProfile() {
+    // set profileId as a param
     //TODO: Apply profile settings to all subscribers associated with the profile
   }
 };

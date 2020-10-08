@@ -166,7 +166,7 @@ export default {
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
       starDialOptions: ['unknown-origin-dial', 'call-forward'],
       outgoingOptions: ['unknown-origin-dial'],
-      timeoutOptions: ['unknown-calls'],
+      timeoutOptions: ['dial-call-timeout'],
       isIndeterminate: false,
       promtIndeterminate: false,
       sdIndeterminate: false,
