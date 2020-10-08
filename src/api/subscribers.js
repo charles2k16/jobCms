@@ -40,9 +40,17 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  getSubscriber() {
-    //  pp subscriberId
-    //TODO: Get subscriber by Id
+  getSubscriber(msisdn) {
+    let url = config.SUBSCRIBERS_URL + '/' + msisdn
+    return axios
+      .get(url, {
+        auth: {
+          username: "default",
+          password: "$PAiC2020@"
+        }
+      })
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
   },
   getAllSubscriber() {
     //TODO: Get all subscribers
