@@ -96,7 +96,10 @@
               :label="cf"
               :key="cf"
               style="display:block;"
-              >{{ cf }}</el-checkbox
+              >{{ getOption(cf) }}:
+              <span class="option-box">{{
+                getOptionParam(cf)
+              }}</span></el-checkbox
             >
           </el-checkbox-group>
         </div>
@@ -169,7 +172,7 @@ export default {
       options: [
         'on-busy: msisdn-on-busy',
         'no-answer: msisdn-no-answer',
-        'unconditional',
+        'unconditional: msisdn-on-busy',
         'on-inactive: msisdn-on-active',
       ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
@@ -266,6 +269,14 @@ export default {
       } else if (type == 'status') {
         console.log(this.subcriberform.status);
       }
+    },
+    getOption(options) {
+      let op = options.split(':');
+      return op[0];
+    },
+    getOptionParam(options) {
+      let op = options.split(':');
+      return op[1];
     },
   },
 };
