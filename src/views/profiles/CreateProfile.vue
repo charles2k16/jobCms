@@ -14,7 +14,12 @@
         <br />
 
         <!-- Status -->
-        <span>Status</span>
+        <!-- <span>Status</span> -->
+        <el-checkbox
+          :indeterminate="sdIndeterminate"
+          v-model="checkAllStarDial"
+          @change="checkAllOptions($event, 'statusl')"
+        >Status</el-checkbox>
 
         <div style="margin-left: 35px;">
           <el-checkbox-group v-model="profileform.status" :max="1">
@@ -22,8 +27,10 @@
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="canceled"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
+            <el-checkbox label="block-inbound-calls"></el-checkbox>
+            <el-checkbox label="block-outbound-calls"></el-checkbox>
 
-            <el-dropdown class="ml-3">
+            <!-- <el-dropdown class="ml-3">
               <span class="el-dropdown-link">
                 <b
                   >block-calls <i class="el-icon-arrow-down el-icon--right"></i
@@ -42,7 +49,7 @@
                   ></el-checkbox>
                 </el-dropdown-item>
               </el-dropdown-menu>
-            </el-dropdown>
+            </el-dropdown> -->
           </el-checkbox-group>
         </div>
 
@@ -58,7 +65,7 @@
             v-model="profileform.starDial"
             @change="checkOptionChange($event, 'star-dial')"
           >
-            <el-checkbox label="unknown-origin-deal"></el-checkbox>
+            <el-checkbox label="unknown-origin-dial"></el-checkbox>
 
             <el-dropdown class="ml-3">
               <span class="el-dropdown-link">
