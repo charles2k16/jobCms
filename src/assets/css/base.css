@@ -104,7 +104,11 @@ a {
 }
 
 .create-user-wrapper {
-  display:flex;
+  display: flex;
   justify-content: center;
-  
+}
+
+.option-box {
+  border: 1px solid rgb(212, 206, 206);
+  padding: 2px;
 }
