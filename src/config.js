@@ -12,4 +12,6 @@ export default {
   PROFILE_URL: API_URL + "profile",
   USERS_URL: API_URL + "user",
   SUBSCRIBERS_URL: API_URL + "subscriber",
+  FEATURES_URL: API_URL + "features",
+  SETTINGS_URL: API_URL + "settings",
 }
