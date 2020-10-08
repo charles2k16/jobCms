@@ -22,8 +22,8 @@
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="canceled"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
-            <el-checkbox label="block:inbound"></el-checkbox>
-            <el-checkbox label="block:outbound"></el-checkbox>
+            <el-checkbox label="block-inbound-calls"></el-checkbox>
+            <el-checkbox label="block-outbound-calls"></el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -40,22 +40,10 @@
             @change="checkOptionChange($event, 'star-dial')"
           >
             <el-checkbox label="unknown-origin-deal"></el-checkbox>
-
-            <el-dropdown class="ml-3">
-              <span class="el-dropdown-link">
-                <b
-                  >call-forward <i class="el-icon-arrow-down el-icon--right"></i
-                ></b>
-              </span>
-              <el-dropdown-menu slot="dropdown" class="status-dropdown">
-                <el-dropdown-item>
-                  <el-checkbox
-                    label="active"
-                    v-model="profileform.starDial"
-                  ></el-checkbox>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <el-checkbox label="callforward:active">
+              callforward:active
+              <input type="text" placeholder="enter regex number"
+            /></el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -82,7 +70,7 @@
           :indeterminate="promtIndeterminate"
           v-model="checkAllPrompt"
           @change="checkAllOptions($event, 'on-prompt')"
-          >On Prompt</el-checkbox
+          >Prompt</el-checkbox
         >
         <div style="margin-left: 35px;">
           <el-checkbox-group
@@ -175,9 +163,9 @@ export default {
         'block-calls',
       ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
-      starDialOptions: ['unknown-origin-deal', 'call-forward'],
-      outgoingOptions: ['unknown-origin-deal'],
-      timeoutOptions: ['unknow-calls'],
+      starDialOptions: ['unknown-origin-dial', 'call-forward'],
+      outgoingOptions: ['unknown-origin-dial'],
+      timeoutOptions: ['unknown-calls'],
       isIndeterminate: false,
       promtIndeterminate: false,
       sdIndeterminate: false,
