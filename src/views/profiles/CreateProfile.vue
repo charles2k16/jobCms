@@ -16,13 +16,13 @@
         <!-- Status -->
         <span>Status</span>
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="profileform.status" :max="1">
+          <el-checkbox-group v-model="status" :max="1">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
-            <el-checkbox label="canceled"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
             <el-checkbox label="block-inbound-calls"></el-checkbox>
             <el-checkbox label="block-outbound-calls"></el-checkbox>
+            <el-checkbox label="cancelled"></el-checkbox>
           </el-checkbox-group>
         </div>
 
@@ -172,6 +172,7 @@ export default {
       sdIndeterminate: false,
       outIndeterminate: false,
       timeoutIndeterminate: false,
+      status: [],
       profileform: {
         name: '',
         settings: [{ id: 'a675509d4af14931b6e375f7a377eb79' }],
@@ -180,6 +181,7 @@ export default {
         starDial: [{ id: '75d47f43a0894a85a0e801e6666d77cd' }],
         outgoingCall: [],
         timeOuts: [],
+        status: [],
         notes: '',
         callForwardOnInactiveTime: 60,
       },
@@ -230,8 +232,6 @@ export default {
         this.checkAllOutgoing = checkedCount === this.outgoingOptions.length;
         this.outIndeterminate =
           checkedCount > 0 && checkedCount < this.outgoingOptions.length;
-      } else if (type == 'status') {
-        console.log(this.profileform.status);
       }
     },
   },
