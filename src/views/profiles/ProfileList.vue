@@ -33,7 +33,7 @@
       </el-table>
     </el-card>
     <div style="text-align: right;" class="mt-4 mr-8" v-show="actionButtons">
-      <el-button type="info" size="mini" @click="editProfile">Edit</el-button>
+      <el-button type="info" size="mini" @click="showEditForm">Edit</el-button>
       <el-button type="danger" size="mini" @click="confirmDeleteProfile"
         >Delete</el-button
       >
@@ -78,12 +78,16 @@
           <el-input
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4 }"
-            v-model="profileform.desc"
+            v-model="profileform.notes"
           ></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary" size="small" @click="onSubmit"
+        <el-button
+          type="primary"
+          size="small"
+          :loading="btnLoading"
+          @click="editProfile"
           >Save</el-button
         >
         <el-button size="small" @click="showEditModal = false"
@@ -101,19 +105,23 @@ export default {
   name: 'profileList',
   data() {
     return {
+      btnLoading: false,
       showEditModal: false,
       actionButtons: false,
       profileSelected: null,
       profileList: [],
       profileform: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
+        profileform: {
+          name: '',
+          settings: [{ id: 'a675509d4af14931b6e375f7a377eb79' }],
+          callForward: [{ id: '5fce9b8c1f034c67a2de41d85a4d35b7' }],
+          prompts: [{ id: '8ed63d5910f74e568d06950719c1271d' }],
+          starDial: [{ id: '75d47f43a0894a85a0e801e6666d77cd' }],
+          outgoingCall: [],
+          timeOuts: [],
+          notes: '',
+          callForwardOnInactiveTime: 60,
+        },
       },
       profiles: [
         {
@@ -173,18 +181,29 @@ export default {
         })
         .catch((errors) => console.log(errors));
     },
-    onSubmit() {
-      console.log('submit!');
+    editProfile() {
+      profileService
+        .updateProfile(this.profileform)
+        .then(() => {
+          this.btnLoading = false;
+          this.successMessage('Edited successfully');
+        })
+        .catch((errors) => {
+          console.log(errors);
+          this.btnLoading = false;
+          this.errorMessage('Error editing profiles');
+        });
     },
     handleSelectionChange(selectedProfile) {
       this.actionButtons = selectedProfile.length > 0 ? true : false;
       this.profileSelected = selectedProfile;
     },
-    editProfile() {
+    showEditForm() {
       if (this.profileSelected.length > 1) {
         this.errorMessage("Can't edit when two profiles are selected");
       } else {
         this.profileform.name = this.profileSelected[0].name;
+        this.profileform.notes = this.profileSelected[0].notes;
         this.showEditModal = true;
       }
     },

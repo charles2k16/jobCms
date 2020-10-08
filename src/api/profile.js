@@ -35,8 +35,17 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  updateProfile() {
-    //TODO: Update profile by Id
+  updateProfile(profile) {
+    let url = config.PROFILE_URL + '/' + profile.id
+    return axios
+      .put(url, profile, {
+        auth: {
+          username: "default",
+          password: "$PAiC2020@"
+        }
+      })
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
   },
   applyProfile() {
     // set profileId as a param
