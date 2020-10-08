@@ -53,7 +53,7 @@
       </el-table>
     </el-card>
     <div style="text-align: right;" class="mt-4 mr-8" v-show="actionButtons">
-      <el-button type="info" size="mini" @click="editSubscriber"
+      <el-button type="info" size="mini" @click="showSubscriberForm"
         >Edit</el-button
       >
       <el-button type="danger" size="mini" @click="confirmDeleteSub"
@@ -128,7 +128,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button type="primary" size="small" @click="onSubmit"
+        <el-button
+          type="primary"
+          size="small"
+          :loading="btnLoading"
+          @click="editSubscriber"
           >Save</el-button
         >
         <el-button size="small" @click="showEditModal = false"
@@ -140,25 +144,31 @@
 </template>
 
 <script>
+import subsService from '../../api/subscribers';
+
 export default {
-  name: 'profileList',
+  name: 'subsList',
   data() {
     return {
+      btnLoading: false,
       disabled: true,
       showEditModal: false,
       actionButtons: false,
       subSelected: null,
       subcriberList: [],
       subcriberform: {
+        id: '',
         msisdn: '',
-        profileName: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
+        password: '',
+        profile: {
+          id: '',
+        },
+        callForward: [],
+        starDial: [],
+        prompt: [],
+        settings: [{ id: 'b9fb671b31634d3d953c46ae93974f78' }],
+        notes: 'Hello !!',
+        callForwardOnInactiveTime: 60,
       },
       subscribers: [
         {
@@ -215,15 +225,27 @@ export default {
       this.actionButtons = selectedSub.length > 0 ? true : false;
       this.subSelected = selectedSub;
     },
-    onSubmit() {
-      console.log('submit!');
-    },
     editSubscriber() {
+      subsService
+        .updateSubscriber(this.subcriberform)
+        .then(() => {
+          this.btnLoading = false;
+          this.successMessage('Edited subscriber successfully');
+        })
+        .catch((errors) => {
+          console.log(errors);
+          this.btnLoading = false;
+          this.errorMessage('Error editing subscribers');
+        });
+    },
+    showSubscriberForm() {
       if (this.subSelected.length > 1) {
         this.errorMessage("Can't edit when two subs are selected");
       } else {
-        this.subcriberform.profileName = this.subSelected[0].profileName;
+        this.subcriberform.id = this.subSelected[0].id;
+        this.subcriberform.profile.id = this.subSelected[0].profile.id;
         this.subcriberform.msisdn = this.subSelected[0].msisdn;
+        this.subcriberform.notes = this.subSelected[0].notes;
         this.showEditModal = true;
       }
     },

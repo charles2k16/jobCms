@@ -16,10 +16,17 @@ export default {
       .then(response => Promise.resolve(response.data))
       .catch(error => Promise.reject(error));
   },
-  updateSubscriber() {
-    // pp subscriber
-    //TODO: update subscriber by Id
-
+  updateSubscriber(subscriber) {
+    let url = config.SUBSCRIBERS_URL + '/' + subscriber.id
+    return axios
+      .put(url, subscriber, {
+        auth: {
+          username: "default",
+          password: "$PAiC2020@"
+        }
+      })
+      .then(response => Promise.resolve(response.data))
+      .catch(error => Promise.reject(error));
   },
   applyProfile() {
     //  pp profileId
