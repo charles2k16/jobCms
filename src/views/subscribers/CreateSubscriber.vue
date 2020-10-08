@@ -91,9 +91,13 @@
             v-model="subcriberform.callForward"
             @change="checkOptionChange($event, 'call-forward')"
           >
-            <el-checkbox v-for="cf in options" :label="cf" :key="cf">{{
-              cf
-            }}</el-checkbox>
+            <el-checkbox
+              v-for="cf in options"
+              :label="cf"
+              :key="cf"
+              style="display:block;"
+              >{{ cf }}</el-checkbox
+            >
           </el-checkbox-group>
         </div>
 
@@ -162,7 +166,12 @@ export default {
       checkAllPrompt: false,
       checkAllStarDial: false,
       checkAllOutgoing: false,
-      options: ['on-busy', 'no-answer', 'unconditional', 'on-inactive'],
+      options: [
+        'on-busy: msisdn-on-busy',
+        'no-answer: msisdn-no-answer',
+        'unconditional',
+        'on-inactive: msisdn-on-active',
+      ],
       promptOptions: ['on-busy', 'no-answer', 'on-inactive'],
       starDialOptions: ['unknown-origin-deal', 'call-forward'],
       outgoingOptions: ['unknown-origin-deal'],
