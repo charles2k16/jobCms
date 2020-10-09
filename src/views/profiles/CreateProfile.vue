@@ -16,7 +16,7 @@
         <!-- Status -->
         <span>Status</span>
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="status" :max="1">
+          <el-checkbox-group v-model="status">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
@@ -188,6 +188,9 @@ export default {
     };
   },
   methods: {
+    // fetch all the setting
+    //  fetch all the features
+
     addProfile() {
       console.log(this.profileform);
       profileService

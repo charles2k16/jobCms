@@ -68,8 +68,8 @@ export default {
       showEditModal: false,
       actionButtons: false,
       userSelected: null,
-      userList: [],
       userform: {
+        id: '',
         user: '',
         password: '',
         status: false,

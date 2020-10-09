@@ -40,7 +40,7 @@
         <!-- Status -->
         <span>Status</span>
         <div style="margin-left: 35px;">
-          <el-checkbox-group v-model="subcriberform.status" :max="1">
+          <el-checkbox-group v-model="subcriberform.status">
             <el-checkbox label="active"></el-checkbox>
             <el-checkbox label="suspended"></el-checkbox>
             <el-checkbox label="do-not-disturb"></el-checkbox>
@@ -158,6 +158,7 @@
 
 <script>
 import subsService from '../../api/subscribers';
+import profileService from '../../api/profile';
 
 export default {
   data() {
@@ -181,23 +182,7 @@ export default {
       sdIndeterminate: false,
       outIndeterminate: false,
       searchOptions: [],
-      profiles: [
-        {
-          name: 'Profile1',
-          subscribers: 2,
-          id: '8282ddhdhdhd',
-        },
-        {
-          name: 'Profile2',
-          subscribers: 2,
-          id: '635egdddddhdd',
-        },
-        {
-          name: 'Profile3',
-          subscribers: 100,
-          id: 'hdgdgd5dgdgdgdg',
-        },
-      ],
+      profiles: [],
       loading: false,
       sub: {
         msisdn: '',
@@ -209,7 +194,6 @@ export default {
         notes: '',
         callForwardOnInactiveTime: 60,
       },
-
       subcriberform: {
         msisdn: '',
         profileName: '',
@@ -227,7 +211,18 @@ export default {
       },
     };
   },
+  created() {
+    this.getProfileList();
+  },
   methods: {
+    getProfileList() {
+      profileService
+        .getProfileList()
+        .then((response) => {
+          this.profiles = response;
+        })
+        .catch((errors) => console.log(errors));
+    },
     createSubscriber() {
       console.log(this.sub);
       this.btnLoading = true;
