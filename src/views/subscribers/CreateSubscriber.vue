@@ -8,7 +8,7 @@
     >
       <el-form-item label="Msisdn">
         <el-input
-          type="text"
+          type="number"
           v-model="sub.msisdn"
           placeholder="enter your msisdn"
         />
@@ -163,7 +163,7 @@ export default {
   data() {
     return {
       btnLoading: false,
-      checkAll: false,
+      checkAll: true,
       checkAllPrompt: false,
       checkAllStarDial: false,
       checkAllOutgoing: false,
@@ -229,7 +229,7 @@ export default {
   },
   methods: {
     createSubscriber() {
-      console.log(this.sub);
+      // console.log(this.sub);
       this.btnLoading = true;
       subsService
         .createSubscriber(this.sub)
