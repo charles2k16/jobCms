@@ -164,7 +164,7 @@ export default {
   data() {
     return {
       btnLoading: false,
-      checkAll: true,
+      checkAll: false,
       checkAllPrompt: false,
       checkAllStarDial: false,
       checkAllOutgoing: false,
