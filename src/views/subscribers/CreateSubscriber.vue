@@ -164,7 +164,7 @@ export default {
   data() {
     return {
       btnLoading: false,
-      checkAll: false,
+      checkAll: true,
       checkAllPrompt: false,
       checkAllStarDial: false,
       checkAllOutgoing: false,
@@ -224,7 +224,7 @@ export default {
         .catch((errors) => console.log(errors));
     },
     createSubscriber() {
-      console.log(this.sub);
+      // console.log(this.sub);
       this.btnLoading = true;
       subsService
         .createSubscriber(this.sub)
